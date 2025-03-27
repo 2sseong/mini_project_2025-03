@@ -73,7 +73,7 @@
     <string>영화 예매</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btn_adminlogin">
    <property name="geometry">
     <rect>
      <x>900</x>

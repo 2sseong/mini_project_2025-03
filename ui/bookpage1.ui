@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>700</height>
+    <height>699</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,20 +78,20 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="btn_2time4">
    <property name="geometry">
     <rect>
      <x>740</x>
-     <y>420</y>
+     <y>400</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>20:00~23:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_10">
+  <widget class="QPushButton" name="btn_1time1">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -101,23 +101,23 @@
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_11">
+  <widget class="QPushButton" name="btn_2time1">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>420</y>
+     <y>400</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_1time2">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -127,14 +127,14 @@
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="three">
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>520</y>
+     <y>470</y>
      <width>71</width>
      <height>41</height>
     </rect>
@@ -148,7 +148,7 @@
     <string>3관</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="btn_1time3">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -158,72 +158,72 @@
     </rect>
    </property>
    <property name="text">
-    <string>17:00~20:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btn_2time2">
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>420</y>
+     <y>400</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_8">
+  <widget class="QPushButton" name="btn_3time4">
    <property name="geometry">
     <rect>
      <x>740</x>
-     <y>570</y>
+     <y>510</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>20:00~23:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_9">
+  <widget class="QPushButton" name="btn_3time3">
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>570</y>
+     <y>510</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>17:00~20:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_12">
+  <widget class="QPushButton" name="btn_3time1">
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>570</y>
+     <y>510</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btn_3time2">
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>570</y>
+     <y>510</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>14:00~17:00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="one">
@@ -244,24 +244,24 @@
     <string>1관</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
+  <widget class="QPushButton" name="btn_2time3">
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>420</y>
+     <y>400</y>
      <width>141</width>
      <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>17:00~20:00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="two">
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>380</y>
+     <y>360</y>
      <width>71</width>
      <height>41</height>
     </rect>
@@ -275,7 +275,7 @@
     <string>2관</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="btn_1time4">
    <property name="geometry">
     <rect>
      <x>740</x>
@@ -285,7 +285,133 @@
     </rect>
    </property>
    <property name="text">
-    <string>20:00~23:00</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="name_movie1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>220</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="name_movie2">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>220</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="name_movie3">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>220</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_moviename">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>600</y>
+     <width>571</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_movietime">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>640</y>
+     <width>571</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>600</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>선택한 영화 : </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>640</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>선택한 시간 : </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>670</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>선택한 관 : </string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_theater">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>670</y>
+     <width>571</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
