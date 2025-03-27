@@ -89,16 +89,6 @@ class SearchPage(QDialog):
     def __init__(self):
         super(SearchPage,self).__init__()
         loadUi('searchpage.ui',self)
-        self.btn_gotohome.clicked.connect(self.gohome)
-
-    def gohome(self):
-        widget.setCurrentIndex(widget.currentIndex()-2)
-        print(widget.currentIndex())
-
-class SearchPage(QDialog):
-    def __init__(self):
-        super(SearchPage,self).__init__()
-        loadUi('searchpage.ui',self)
 
         self.btn_gotohome.clicked.connect(self.gohome)
         self.btn_search.clicked.connect(self.startsearch)
