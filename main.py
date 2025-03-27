@@ -4,7 +4,8 @@ from PyQt5.QtGui import *
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt
-from PyQt5 import uic
+
+
 
 
 class MainWindow(QDialog):
@@ -25,30 +26,34 @@ class MainWindow(QDialog):
 
             # 로그인 성공
             print("관리자 로그인 성공! 관리자 페이지로 이동 가능.")
-            # 여기에 관리자 페이지 진입 함수 호출 가능
+            # 관리자 페이지 1번, 함수 만들어 안쓰고 바로 호출함
+            widget.setCurrentIndex(widget.currentIndex()+1) 
+            print(widget.currentIndex())
+            
         else:
             print("관리자 로그인 취소됨")
-
-
-    def gotoSearch(self):
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        print(widget.currentIndex())
     
-    def gotoBookPage(self):
+    def gotoSearch(self):
+        #예매조회 페이지 2번
         widget.setCurrentIndex(widget.currentIndex()+2)
+        print(widget.currentIndex())
+
+
+    def gotoBookPage(self):
+        #예매 페이지 3번
+        widget.setCurrentIndex(widget.currentIndex()+3)
         print(widget.currentIndex())
 
     def loginFunction(self):
         user_id = self.user_id.text()
         user_pw = self.user_pw.text()
-        print("성공적으로 로그인되었습니다.", user_id, user_pw)
+        print("성공적으로 로그인되었습니다."), user_id, user_pw
 
-
-
+#로그인 입력창
 class LoginDialog(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi("admin_login.ui", self)
+        loadUi("admin_login.ui", self)
 
         self.btn_ok.clicked.connect(self.check_login)
         #self.btnCancel.clicked.connect(self.reject)
@@ -57,13 +62,26 @@ class LoginDialog(QDialog):
         user_id = self.user_id.text()
         user_pw = self.user_pw.text()
 
-        # 예시 관리자 계정 확인
+        #관리자 계정 로그인
         if user_id == "admin" and user_pw == "1234":
             QMessageBox.information(self, "로그인 성공", "로그인에 성공했습니다!")
             self.accept()
         else:
             QMessageBox.warning(self, "로그인 실패", "아이디 또는 비밀번호가 틀렸습니다.")
 
+
+class AdminPage(QDialog):
+    def __init__(self):
+        super(AdminPage,self).__init__()
+        loadUi('adminpage.ui', self)    
+
+        self.btn_go_to_main.clicked.connect(self.gotomain)
+    
+    
+    def gotomain(self):
+        # 관리자 페이지 1번이므로,  홈으로 돌아오게 하려면 -1
+        widget.setCurrentIndex(widget.currentIndex()-1)
+        print(widget.currentIndex())
 
 
 
@@ -75,8 +93,10 @@ class SearchPage(QDialog):
         self.btn_gotohome.clicked.connect(self.gotohome)
 
     def gotohome(self):
-        widget.setCurrentIndex(widget.currentIndex()-1)
+        # 예매조회 페이지 2번이므로,  홈으로 돌아오게 하려면 -2
+        widget.setCurrentIndex(widget.currentIndex()-2)
         print(widget.currentIndex())
+
 
 class BookPage1(QDialog):
     def __init__(self):
@@ -89,7 +109,7 @@ class BookPage1(QDialog):
         self.btn_movie1.setIconSize(self.btn_movie1.size())
 
     def goHome(self):
-        widget.setCurrentIndex(widget.currentIndex()-2)
+        widget.setCurrentIndex(widget.currentIndex()-3)
         
     def goNext(self):
         widget.setCurrentIndex(widget.currentIndex()+1)
@@ -142,15 +162,18 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()
     mainwindow = MainWindow()
+    adminPage = AdminPage()
     searchpage = SearchPage()
     bookpage1 = BookPage1()
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
     widget.addWidget(mainwindow)
+    widget.addWidget(adminPage)
     widget.addWidget(searchpage)
     widget.addWidget(bookpage1)
     widget.addWidget(bookpage2)
     widget.addWidget(bookpage3)
+   
     widget.show()
     app.exec_()
 
