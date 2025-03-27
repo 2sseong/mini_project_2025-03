@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import QtWidgets, QtGui, uic
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 
 import cx_Oracle as oci
 
@@ -13,9 +13,10 @@ port = 1521
 username = 'movie'
 password = '1234'
 
-public_selectname = ''
-public_selecttime = ''
-public_selecttheater = ''
+class GlobalStore:
+    public_selectname = ''
+    public_selecttime = ''
+    public_selecttheater = ''
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -148,6 +149,7 @@ class SearchPage(QDialog):
             self.inplbl_4.setText(str(lst_ticket[0][3]))
 
 class BookPage1(QDialog):
+    resetLabelSignal = pyqtSignal()
     def __init__(self):
         super(BookPage1,self).__init__()
         loadUi('bookpage1.ui',self)
@@ -221,6 +223,7 @@ class BookPage1(QDialog):
         widget.setCurrentIndex(widget.currentIndex()-3)
         
     def goNext(self):
+        self.resetLabelSignal.emit()
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def checkInput(self):
@@ -232,13 +235,12 @@ class BookPage1(QDialog):
             self.btn_next.setEnabled(True)
         else:
             self.btn_next.setEnabled(False)
-        global public_selectname, public_selecttime, public_selecttheater
-        public_selectname = input_moviename
-        public_selecttime = input_movietime
-        public_selecttheater = input_theater
-        # print(public_selectname)
-        # print(public_selecttime)
-        # print(public_selecttheater)
+        GlobalStore.public_selectname = input_moviename
+        GlobalStore.public_selecttime = input_movietime
+        GlobalStore.public_selecttheater = input_theater
+        # print(GlobalStore.public_selectname)
+        # print(GlobalStore.public_selecttime)
+        # print(GlobalStore.public_selecttheater)
 
     def loadTime(self):  
         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
@@ -295,6 +297,9 @@ class BookPage2(QDialog):
 
         # if seat != '':
         #     self.btn_next.setEnabled(True)
+        print(GlobalStore.public_selectname)
+        print(GlobalStore.public_selecttime)
+        print(GlobalStore.public_selecttheater)
 
         self.input_adt.textChanged.connect(self.checkInput)
         self.input_teen.textChanged.connect(self.checkInput)
@@ -307,6 +312,11 @@ class BookPage2(QDialog):
             btn_teen = getattr(self, f"btn_teen{i}")
             btn_adt.clicked.connect(self.getAdultNumber)
             btn_teen.clicked.connect(self.getTeenNumber)
+
+    def resetLabel(self):
+        self.lbl_test1.setText(GlobalStore.public_selectname)
+        self.lbl_test2.setText(GlobalStore.public_selecttime)
+        self.lbl_test3.setText(GlobalStore.public_selecttheater)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
@@ -339,7 +349,7 @@ class BookPage2(QDialog):
             self.btn_next.setEnabled(True)
         else:
             self.btn_next.setEnabled(False)
-
+        
 class BookPage3(QDialog):
     def __init__(self):
         super(BookPage3,self).__init__()
@@ -362,9 +372,10 @@ class BookPage3(QDialog):
     def goNext(self):
         widget.setCurrentIndex(widget.currentIndex()+1)
     
-obj = BookPage1()
+# obj = BookPage1()
 # obj.checkInput()
-print(public_selectname)
+# print(public_selectname)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -375,6 +386,7 @@ if __name__ == '__main__':
     bookpage1 = BookPage1()
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
+    bookpage1.resetLabelSignal.connect(bookpage2.resetLabel)
     widget.addWidget(mainwindow)
     widget.addWidget(adminPage)
     widget.addWidget(searchpage)
