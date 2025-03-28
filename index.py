@@ -192,8 +192,11 @@ class SearchPage(QDialog):
             items = [QStandardItem(str(col)) for col in row]
             model.appendRow(items)
 
-        self.tbl_search.setModel(model)
         self.tbl_search.resizeColumnsToContents()
+        self.tbl_search.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tbl_search.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tbl_search.setSortingEnabled(True)
+        self.tbl_search.setModel(model)
 
 
 
@@ -624,6 +627,7 @@ class BookPage4(QDialog):
         self.btn_guest.clicked.connect(self.guestInformation)
 
     def userInformation(self):
+        dlg = Payment() #payment클래스 쓰기위한 변수
         user_id = self.input_userid.text()
         if user_id == '':
             QMessageBox.warning(self, "입력 누락", "모든 정보를 입력해주세요")
@@ -655,13 +659,16 @@ class BookPage4(QDialog):
                 for i in result:
                     GlobalStore.public_personinfo.append(i)
                 print(GlobalStore.public_personinfo[0])
+                dlg.exec() == QDialog.Accepted
+                widget.setCurrentIndex(widget.currentIndex()+5) 
             else:
                 QMessageBox.warning(self, "오류", "해당 회원이 존재하지 않습니다.")
 
         except Exception as e:
             QMessageBox.critical(self, "DB 오류", str(e))
 
-    def guestInformation(self):
+    def guestInformation(self): 
+        dlg = Payment()
         guest_name = self.input_name.text() or None
         guest_phone = self.input_phone.text()
         guest_birth = self.input_birth.text() or None
@@ -678,12 +685,20 @@ class BookPage4(QDialog):
         GlobalStore.public_personinfo.append(guest_phone)
         GlobalStore.public_personinfo.append(guest_birth)
         GlobalStore.public_personinfo.append(guest_gender)
+        QMessageBox.information(self, "비회원 결제", "비회원정보 입력이 완료되어 결제창으로 이동합니다.")
+        dlg.exec() == QDialog.Accepted
+        widget.setCurrentIndex(widget.currentIndex()+5) 
             
         print(GlobalStore.public_personinfo)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
         print(widget.currentIndex())
+
+class Payment(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("payment.ui", self)
 # class BookPage4(QDialog):
 #     def __init__(self):
 #         super(BookPage4,self).__init__()
@@ -704,6 +719,7 @@ if __name__ == '__main__':
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
     bookpage4 = BookPage4()
+    payment = Payment()
     bookpage1.resetLabelSignal.connect(bookpage2.resetLabel)
     bookpage2.resetLabelSignal.connect(bookpage3.resetLabel)
     widget.addWidget(mainwindow)
@@ -713,6 +729,7 @@ if __name__ == '__main__':
     widget.addWidget(bookpage2)
     widget.addWidget(bookpage3)
     widget.addWidget(bookpage4)
+    widget.addWidget(payment)
     widget.show()
     app.exec_()
 
