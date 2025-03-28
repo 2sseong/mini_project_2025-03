@@ -659,14 +659,19 @@ class BookPage4(QDialog):
             QMessageBox.critical(self, "DB 오류", str(e))
 
     def guestInformation(self):
-        guest_name = self.input_name.text()
+        guest_name = self.input_name.text() or None
         guest_phone = self.input_phone.text()
-        guest_birth = self.input_birth.text()
-        guest_gender = self.input_gender.text()
+        guest_birth = self.input_birth.text() or None
+        guest_gender = self.input_gender.text() or None
         if guest_phone == '':
             QMessageBox.warning(self, "경고", "전화번호 기입은 필수입니다.")
         else: 
-            print("됨")
+            GlobalStore.public_personinfo.append(guest_name)
+            GlobalStore.public_personinfo.append(guest_phone)
+            GlobalStore.public_personinfo.append(guest_birth)
+            GlobalStore.public_personinfo.append(guest_gender)
+            
+            print(GlobalStore.public_personinfo)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
