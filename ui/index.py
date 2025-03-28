@@ -25,14 +25,14 @@ class GlobalStore:
     public_selecttheater = ''
     public_adtnumber = 0
     public_teennumber = 0
-    public_seat = ''
-    public_occupied = ['A01', 'A02']
+    public_seat = []
+    public_occupied = ['A04', 'A05','E04']
 
 class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('mainpage.ui',self)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
         self.setStyleSheet("background-color: white;") # 배경화면 색상
 
         self.btn_search.clicked.connect(self.gotoSearch)
@@ -74,7 +74,7 @@ class MainWindow(QDialog):
             print("관리자 로그인 성공! 관리자 페이지로 이동 가능.")
             # 관리자 페이지 1번, 함수 만들어 안쓰고 바로 호출함
             widget.setCurrentIndex(widget.currentIndex()+1) 
-            print(widget.currentIndex())
+            # print(widget.currentIndex())
         else:
             print("관리자 로그인 취소됨")
 
@@ -82,12 +82,12 @@ class MainWindow(QDialog):
     def gotoSearch(self):
         #예매조회 페이지 2번
         widget.setCurrentIndex(widget.currentIndex()+2)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
     
     def gotoBookPage(self):
         #예매 페이지 3번
         widget.setCurrentIndex(widget.currentIndex()+3)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
     def loginFunction(self):
         user_id = self.user_id.text()
@@ -125,7 +125,7 @@ class AdminPage(QDialog):
     def gotomain(self):
         # 관리자 페이지 1번이므로,  홈으로 돌아오게 하려면 -1
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
 class SearchPage(QDialog):
     def __init__(self):
@@ -137,7 +137,7 @@ class SearchPage(QDialog):
 
     def gohome(self):
         widget.setCurrentIndex(widget.currentIndex()-2)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
     def startsearch(self):
         std_ticket_id = self.input_key.text()
@@ -503,7 +503,7 @@ class BookPage2(QDialog):
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
     def goNext(self):
         self.resetLabelSignal.emit()
@@ -554,30 +554,84 @@ class BookPage3(QDialog):
         super(BookPage3,self).__init__()
         loadUi('bookpage3.ui',self)
 
-        seat = '1'
-
-        self.btn_next.setEnabled(False)
-
-        if seat != '':
-            self.btn_next.setEnabled(True)
-
         self.btn_goback.clicked.connect(self.goBack)
+        self.btn_next.setDisabled(True)
         self.btn_next.clicked.connect(self.goNext)
-
+        
         # select_theaternum = GlobalStore.public_selecttheater
         # select_theaternum = int(select_theaternum[0])
 
-        print(GlobalStore.public_occupied)
+        # print(GlobalStore.public_occupied)
+        buttons = self.findChildren(QPushButton)
+        # print(buttons[0].text())
+        for j in GlobalStore.public_occupied:
+            for i in buttons:
+                if j == i.text():
+                    i.setDisabled(True)
 
-        # for i in range(len(GlobalStore.public_occupied)):
+        for i in range(len(buttons) - 2):
+            seatbtn = getattr(self, f'seat_{i + 1}')
+            seatbtn.clicked.connect(lambda _, sb=seatbtn: self.selectSeat(sb.text()))
 
+        # self.seat_19.clicked.connect(self.test)
 
-        if GlobalStore.public_occupied[0] == self.seat_A01.text():
-            self.seat_A01.setDisabled(True)
+    def selectSeat(self,text):
+        temp = []
+        GlobalStore.public_seat = []
+        total_peoplenum = int(GlobalStore.public_adtnumber) + int(GlobalStore.public_teennumber)
+        temp.append(text)
+        # print(int(text[1:]))
+        # print(int(text[1:]) + 1)
+        for i in range(total_peoplenum - 1):
+            if int(text[1:]) + i + 1 < 10:
+                temp.append(f'{text[:2]}{int(text[1:]) + i + 1}')
+        if total_peoplenum == len(temp):
+            for i in temp:
+                GlobalStore.public_seat.append(i)
+
+            buttons = self.findChildren(QPushButton)
+            for i in range(len(buttons) - 2):
+                seatbtn1 = getattr(self, f'seat_{i + 1}')
+                seatbtn1.setStyleSheet(
+                    """QPushButton{""
+                    }""")
+                
+            for j in GlobalStore.public_seat:
+                # print(j)
+                for i in range(len(buttons) - 2):
+                    seatbtn2 = getattr(self, f'seat_{i + 1}')
+                    if seatbtn2.text() == j:
+                        # print(seatbtn)
+                        seatbtn2.setStyleSheet(
+                            """QPushButton{
+                            background-color: black;
+                            color: white;
+                            border-radius: 4px;
+                            }"""
+                        )
+
+            lbl_seat_text = ", ".join(GlobalStore.public_seat)
+            self.lbl_seat.setText(lbl_seat_text)
+
+            if len(GlobalStore.public_seat) == 0:
+                self.btn_next.setDisabled(True)
+            else:
+                self.btn_next.setDisabled(False)
+            #     seatbtn.setDisabled(True)
+            #     if seatbtn.text() == j:
+            #         seatbtn.setDisabled(False)
+
+        # print(GlobalStore.public_seat)
+
+                    # seatbtn.setStyleSheet(
+                    #     """QPushButton{""
+                    #     }"""
+                    # )
+        
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
     def goNext(self):
         widget.setCurrentIndex(widget.currentIndex()+1)
