@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 import urllib.request
 from urllib.parse import urlparse, parse_qs, unquote
-from PyQt5.QtCore import Qt, pyqtSignal, QSize
+from PyQt5.QtCore import Qt, pyqtSignal, QSize 
 
 # import ssl
 # ssl._create_default_https_context = ssl._create_unverified_context
@@ -27,6 +27,7 @@ class GlobalStore:
     public_teennumber = 0
     public_seat = []
     public_occupied = []
+    public_personinfo = []
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -615,12 +616,13 @@ class BookPage4(QDialog):
         super(BookPage4,self).__init__()
         loadUi('bookpage4.ui',self)
 
+        self.btn_goback.clicked.connect(self.goBack)
         self.btn_user.clicked.connect(self.userInformation)
         self.btn_guest.clicked.connect(self.guestInformation)
 
     def userInformation(self):
-        user_name = self.input_userid.text()
-        if user_name == '':
+        user_id = self.input_userid.text()
+        if user_id == '':
             QMessageBox.warning(self,"입력 누락","모든 정보를 입력해주세요")
         else:        
             QMessageBox.information(self, "입력 완료", "회원정보 입력 완료되었습니다.")   
@@ -630,7 +632,10 @@ class BookPage4(QDialog):
         guest_phone = self.input_phone.text()
         guest_birth = self.input_birth.text()
         guest_gender = self.input_gender.text()
-        QMessageBox.information(self, "환영함", "비회원으로 결제 진행합니다.")
+        if guest_phone == '':
+            QMessageBox.warning(self, "경고", "전화번호 기입은 필수입니다.")
+        else: 
+            print("됨")
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
