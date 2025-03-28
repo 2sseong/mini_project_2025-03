@@ -25,7 +25,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="seat_A01">
+  <widget class="QPushButton" name="seat_1">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -44,7 +44,7 @@
     <string>A01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A02">
+  <widget class="QPushButton" name="seat_2">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -63,7 +63,7 @@
     <string>A02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B01">
+  <widget class="QPushButton" name="seat_10">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -82,7 +82,7 @@
     <string>B01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B02">
+  <widget class="QPushButton" name="seat_11">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -101,7 +101,7 @@
     <string>B02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D02">
+  <widget class="QPushButton" name="seat_29">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -120,7 +120,7 @@
     <string>D02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C02">
+  <widget class="QPushButton" name="seat_20">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -139,7 +139,7 @@
     <string>C02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C01">
+  <widget class="QPushButton" name="seat_19">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -158,7 +158,7 @@
     <string>C01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D01">
+  <widget class="QPushButton" name="seat_28">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -177,7 +177,7 @@
     <string>D01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E02">
+  <widget class="QPushButton" name="seat_38">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -196,7 +196,7 @@
     <string>E02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E01">
+  <widget class="QPushButton" name="seat_37">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -215,7 +215,7 @@
     <string>E01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B03">
+  <widget class="QPushButton" name="seat_12">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -234,7 +234,7 @@
     <string>B03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C03">
+  <widget class="QPushButton" name="seat_21">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -253,7 +253,7 @@
     <string>C03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A03">
+  <widget class="QPushButton" name="seat_3">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -272,7 +272,7 @@
     <string>A03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E03">
+  <widget class="QPushButton" name="seat_39">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -291,7 +291,7 @@
     <string>E03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D03">
+  <widget class="QPushButton" name="seat_30">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -310,7 +310,7 @@
     <string>D03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C04">
+  <widget class="QPushButton" name="seat_22">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -329,7 +329,7 @@
     <string>C04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B04">
+  <widget class="QPushButton" name="seat_13">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -348,7 +348,7 @@
     <string>B04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D04">
+  <widget class="QPushButton" name="seat_31">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -367,7 +367,7 @@
     <string>D04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E04">
+  <widget class="QPushButton" name="seat_40">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -386,7 +386,7 @@
     <string>E04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A04">
+  <widget class="QPushButton" name="seat_4">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -405,7 +405,7 @@
     <string>A04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D05">
+  <widget class="QPushButton" name="seat_32">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -424,7 +424,7 @@
     <string>D05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E05">
+  <widget class="QPushButton" name="seat_41">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -443,7 +443,7 @@
     <string>E05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A05">
+  <widget class="QPushButton" name="seat_5">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -462,7 +462,7 @@
     <string>A05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C05">
+  <widget class="QPushButton" name="seat_23">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -481,7 +481,7 @@
     <string>C05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B05">
+  <widget class="QPushButton" name="seat_14">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -500,7 +500,7 @@
     <string>B05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D06">
+  <widget class="QPushButton" name="seat_33">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -519,7 +519,7 @@
     <string>D06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C06">
+  <widget class="QPushButton" name="seat_24">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -538,7 +538,7 @@
     <string>C06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A06">
+  <widget class="QPushButton" name="seat_6">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -557,7 +557,7 @@
     <string>A06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E06">
+  <widget class="QPushButton" name="seat_42">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -576,7 +576,7 @@
     <string>E06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B06">
+  <widget class="QPushButton" name="seat_15">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -595,7 +595,7 @@
     <string>B06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C07">
+  <widget class="QPushButton" name="seat_25">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -614,7 +614,7 @@
     <string>C07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E07">
+  <widget class="QPushButton" name="seat_43">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -633,7 +633,7 @@
     <string>E07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B07">
+  <widget class="QPushButton" name="seat_16">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -652,7 +652,7 @@
     <string>B07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A07">
+  <widget class="QPushButton" name="seat_7">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -671,7 +671,7 @@
     <string>A07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D07">
+  <widget class="QPushButton" name="seat_34">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -690,7 +690,7 @@
     <string>D07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F06">
+  <widget class="QPushButton" name="seat_51">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -709,7 +709,7 @@
     <string>F06</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F07">
+  <widget class="QPushButton" name="seat_52">
    <property name="geometry">
     <rect>
      <x>600</x>
@@ -728,7 +728,7 @@
     <string>F07</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F04">
+  <widget class="QPushButton" name="seat_49">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -747,7 +747,7 @@
     <string>F04</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F03">
+  <widget class="QPushButton" name="seat_48">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -766,7 +766,7 @@
     <string>F03</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F05">
+  <widget class="QPushButton" name="seat_50">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -785,7 +785,7 @@
     <string>F05</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F01">
+  <widget class="QPushButton" name="seat_46">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -804,7 +804,7 @@
     <string>F01</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F02">
+  <widget class="QPushButton" name="seat_47">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -823,7 +823,7 @@
     <string>F02</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B09">
+  <widget class="QPushButton" name="seat_18">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -842,7 +842,7 @@
     <string>B09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C09">
+  <widget class="QPushButton" name="seat_27">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -861,7 +861,7 @@
     <string>C09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E08">
+  <widget class="QPushButton" name="seat_44">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -880,7 +880,7 @@
     <string>E08</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A09">
+  <widget class="QPushButton" name="seat_9">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -899,7 +899,7 @@
     <string>A09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_E09">
+  <widget class="QPushButton" name="seat_45">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -918,7 +918,7 @@
     <string>E09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D08">
+  <widget class="QPushButton" name="seat_35">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -937,7 +937,7 @@
     <string>D08</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F09">
+  <widget class="QPushButton" name="seat_54">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -956,7 +956,7 @@
     <string>F09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_F08">
+  <widget class="QPushButton" name="seat_53">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -975,7 +975,7 @@
     <string>F08</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_A08">
+  <widget class="QPushButton" name="seat_8">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -994,7 +994,7 @@
     <string>A08</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_C08">
+  <widget class="QPushButton" name="seat_26">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -1013,7 +1013,7 @@
     <string>C08</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_D09">
+  <widget class="QPushButton" name="seat_36">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -1032,7 +1032,7 @@
     <string>D09</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="seat_B08">
+  <widget class="QPushButton" name="seat_17">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -1320,12 +1320,12 @@
     <string>좌석</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_test5_2">
+  <widget class="QLabel" name="lbl_seat">
    <property name="geometry">
     <rect>
      <x>500</x>
      <y>610</y>
-     <width>200</width>
+     <width>300</width>
      <height>20</height>
     </rect>
    </property>
