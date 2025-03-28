@@ -163,36 +163,39 @@ class SearchPage(QDialog):
         conn.begin() 
 
         query = '''
-           SELECT t.TICKET_ID, t.user_id, g.name, m.title, s.START_TIME
+           SELECT t.TICKET_ID, t.user_id, g.name, m.title, s.START_TIME, t.youth
              FROM TICKETINFO t, schedule s, gallery g, movieinfo m
             WHERE t.USER_ID = g.USER_ID
               AND t.SCHEDULE_ID = s.SCHEDULE_ID 
               AND s.MOVIE_ID = m.MOVIE_ID
-              AND t.TICKET_ID = :v_std_ticket_id
+              AND g.USER_ID = :v_std_ticket_id
             ORDER BY t.TICKET_ID
                 '''
 
         cursor.execute(query, {'v_std_ticket_id': str(std_ticket_id)})
 
-        lst_ticket = []
-        for _, item in enumerate(cursor):
-            lst_ticket.append(item)
-        print(lst_ticket)
+        lst_ticket = cursor.fetchall()
+        print(lst_ticket)        
         self.makeTable(lst_ticket)
 
         cursor.close()
         conn.close()
 
     def makeTable(self,lst_ticket):
-            if not lst_ticket:  #예매번호 없을때 
-                QMessageBox.warning(self, '오류', '예매번호가 없어요')
-                self.inplbl_1.setText('')
-                self.inplbl_2.setText('')
-                self.inplbl_3.setText('')
-                self.inplbl_4.setText('')
-                return
-            for i in range(len(lst_ticket[0])):
-               getattr(self,f'inplbl_{i+1}').setText(str(lst_ticket[0][i]))
+        if not lst_ticket:  #예매번호 없을때 
+            QMessageBox.warning(self, '오류', '예매번호가 없어요')
+            self.tbl_search.setModel(None)
+            return
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(['티켓ID', '회원ID', '이름', '영화제목', '상영시간', '청소년 수'])
+        for row in lst_ticket:
+            items = [QStandardItem(str(col)) for col in row]
+            model.appendRow(items)
+
+        self.tbl_search.setModel(model)
+        self.tbl_search.resizeColumnsToContents()
+
+
 
 class BookPage1(QDialog):
     resetLabelSignal = pyqtSignal()
@@ -644,7 +647,7 @@ class BookPage4(QDialog):
 
             if result:
                 name, phone, birth, gender = result
-                # 클리어 작업 넣기personinfo
+                GlobalStore.public_personinfo.clear() # 클리어 작업 넣기personinfo
                 QMessageBox.information(
                     self, "회원 확인",
                     f"회원정보 확인 완료:\n이름: {name}\n전화: {phone}\n생일: {birth}\n성별: {gender}"
@@ -665,13 +668,18 @@ class BookPage4(QDialog):
         guest_gender = self.input_gender.text() or None
         if guest_phone == '':
             QMessageBox.warning(self, "경고", "전화번호 기입은 필수입니다.")
-        else: 
-            GlobalStore.public_personinfo.append(guest_name)
-            GlobalStore.public_personinfo.append(guest_phone)
-            GlobalStore.public_personinfo.append(guest_birth)
-            GlobalStore.public_personinfo.append(guest_gender)
+            return
+        if not guest_phone.isdigit() or len(guest_phone) != 11:
+            QMessageBox.warning(self, "경고", "전화번호는 11자리 숫자여야 합니다.")
+            return
+        
+        GlobalStore.public_personinfo.clear() # 클리어 작업 넣기personinfo
+        GlobalStore.public_personinfo.append(guest_name)
+        GlobalStore.public_personinfo.append(guest_phone)
+        GlobalStore.public_personinfo.append(guest_birth)
+        GlobalStore.public_personinfo.append(guest_gender)
             
-            print(GlobalStore.public_personinfo)
+        print(GlobalStore.public_personinfo)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
