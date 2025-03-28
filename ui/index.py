@@ -317,15 +317,15 @@ class BookPage1(QDialog):
         super(BookPage1, self).__init__()
         loadUi('bookpage1.ui', self)
 
-        self.movie_id = None  # 선택된 영화의 movie_id 저장
+        self.movie_id = None  
 
-        # 모든 시간 버튼 비활성화
+       
         for i in range(1, 4):  # 관 1~3
             for j in range(1, 5):  # 시간 버튼 1~4
                 btn = getattr(self, f"btn_{i}time{j}")
                 btn.setEnabled(False)
 
-        # 영화 리스트 로드 및 버튼 연결
+       
         self.movielist = self.loadName()
         for i, (title, movie_id, poster_url) in enumerate(self.movielist):
             name_movie = getattr(self, f"name_movie{i + 1}")
@@ -334,7 +334,7 @@ class BookPage1(QDialog):
             name_movie.setText(title)
             btn_movie.clicked.connect(lambda _, t=title: self.selectMovieName(t))
 
-            # 실제 이미지 주소 추출
+          
             real_url = extract_real_image_url(poster_url)
             try:
                 image_data = urllib.request.urlopen(real_url).read()
@@ -349,8 +349,6 @@ class BookPage1(QDialog):
                 print(e)
 
 
-
-        # 시간 버튼 공통 이벤트 연결
         for i in range(1, 4):
             for j in range(1, 5):
                 btn_time = getattr(self, f"btn_{i}time{j}")
@@ -367,15 +365,10 @@ class BookPage1(QDialog):
         self.btn_gohome.clicked.connect(self.goHome)
         self.btn_next.clicked.connect(self.goNext)
 
-        self.input_moviename.clear()
-        self.input_movietime.clear()
-        self.input_theater.clear()
-
     def selectMovieName(self, movie_name):
         self.input_moviename.setText(movie_name)
         self.movie_id = self.getMovieIdByTitle(movie_name)
 
-        # 관별 시간대 로딩 및 버튼 세팅
         for hall_num in range(1, 4):
             times = self.loadTime(hall_num, self.movie_id)
             for j in range(1, 5):
@@ -402,6 +395,11 @@ class BookPage1(QDialog):
         self.input_moviename.clear()
         self.input_movietime.clear()
         self.input_theater.clear()
+        for i in range(1, 4):
+            for j in range(1, 5):
+                btn = getattr(self, f"btn_{i}time{j}")
+                btn.setText('')
+                btn.setEnabled(False)
 
     def goNext(self):
         self.resetLabelSignal.emit()
@@ -409,6 +407,11 @@ class BookPage1(QDialog):
         self.input_moviename.clear()
         self.input_movietime.clear()
         self.input_theater.clear()
+        for i in range(1, 4):
+            for j in range(1, 5):
+                btn = getattr(self, f"btn_{i}time{j}")
+                btn.setText('')
+                btn.setEnabled(False)
 
     def checkInput(self):
         input_moviename = self.input_moviename.text()
@@ -509,6 +512,8 @@ class BookPage2(QDialog):
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
         self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(str(GlobalStore.public_adtnumber))
+        self.lbl_teennum.setText(str(GlobalStore.public_teennumber))
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex() - 1)
@@ -562,15 +567,13 @@ class BookPage2(QDialog):
         self.adt_text = self.input_adt.text()
         self.teen_text = self.input_teen.text()
 
-        #정보 받아온거를 여기에서 인원 표시 해줌
-        self.lbl_adtnum.setText(self.adt_text)
-        self.lbl_teennum.setText(self.teen_text)
-
-
         self.btn_next.setEnabled(bool(self.adt_text or self.teen_text))
 
         GlobalStore.public_adtnumber = self.adt_text
         GlobalStore.public_teennumber = self.teen_text
+
+        self.lbl_adtnum.setText(self.adt_text)
+        self.lbl_teennum.setText(self.teen_text)
 
     def loadOccupied(self, theaternum):
         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
@@ -581,6 +584,7 @@ class BookPage2(QDialog):
             WHERE CNMTHEATER_ID = :theaternum
         '''
         cursor.execute(query, {'theaternum': theaternum})
+
 
         
 class BookPage3(QDialog):
