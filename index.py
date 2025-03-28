@@ -623,9 +623,40 @@ class BookPage4(QDialog):
     def userInformation(self):
         user_id = self.input_userid.text()
         if user_id == '':
-            QMessageBox.warning(self,"입력 누락","모든 정보를 입력해주세요")
-        else:        
-            QMessageBox.information(self, "입력 완료", "회원정보 입력 완료되었습니다.")   
+            QMessageBox.warning(self, "입력 누락", "모든 정보를 입력해주세요")
+            return
+
+        try:
+            conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+            cursor = conn.cursor()
+
+            query = '''
+                SELECT name, phone_number, to_char(birth_date,'yyyy-mm-dd'), gender
+                FROM gallery
+                WHERE user_id = :v_user_id
+            '''
+
+            cursor.execute(query, {'v_user_id': user_id})
+            result = cursor.fetchone()
+            print(result)
+            cursor.close()
+            conn.close()
+
+            if result:
+                name, phone, birth, gender = result
+                # 클리어 작업 넣기personinfo
+                QMessageBox.information(
+                    self, "회원 확인",
+                    f"회원정보 확인 완료:\n이름: {name}\n전화: {phone}\n생일: {birth}\n성별: {gender}"
+                )
+                for i in result:
+                    GlobalStore.public_personinfo.append(i)
+                print(GlobalStore.public_personinfo[0])
+            else:
+                QMessageBox.warning(self, "오류", "해당 회원이 존재하지 않습니다.")
+
+        except Exception as e:
+            QMessageBox.critical(self, "DB 오류", str(e))
 
     def guestInformation(self):
         guest_name = self.input_name.text()
