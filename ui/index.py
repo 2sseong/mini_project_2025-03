@@ -17,17 +17,47 @@ class GlobalStore:
     public_selectname = ''
     public_selecttime = ''
     public_selecttheater = ''
+    public_adtnumber = ''
+    public_teennumber = ''
+    public_seat = ''
 
 class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('mainpage.ui',self)
         print(widget.currentIndex())
+        self.setStyleSheet("background-color: #EFF0F5;") # 배경화면 색상
 
         self.btn_search.clicked.connect(self.gotoSearch)
         self.btn_book.clicked.connect(self.gotoBookPage)
         self.adminButton = self.findChild(QPushButton, "btn_adminlogin")
         self.adminButton.clicked.connect(self.show_admin_login)
+
+        self.btn_search.setStyleSheet("""
+            btn_search {
+                background-color: #105FFA; /* 버튼 배경색 */
+                color: white;             /* 텍스트 색 */
+                border-radius: 4px;      /* 모서리를 둥글게 */
+            }
+        """)
+
+        self.btn_book.setStyleSheet("""
+            btn_book {
+                background-color: #105FFA; /* 버튼 배경색 */
+                color: white;             /* 텍스트 색 */
+                border-radius: 4px;      /* 모서리를 둥글게 */
+            }
+        """)
+
+        self.btn_adminlogin.setStyleSheet("""
+            btn_adminlogin {
+                background-color: #105FFA; /* 버튼 배경색 */
+                color: white;             /* 텍스트 색 */
+                border-radius: 4px;      /* 모서리를 둥글게 */
+            }
+        """)
+
+        self.lbl_title.setStyleSheer("color: black;")
 
     def show_admin_login(self):
         dlg = LoginDialog()
@@ -297,9 +327,12 @@ class BookPage2(QDialog):
 
         # if seat != '':
         #     self.btn_next.setEnabled(True)
-        print(GlobalStore.public_selectname)
-        print(GlobalStore.public_selecttime)
-        print(GlobalStore.public_selecttheater)
+        # print(GlobalStore.public_selectname)
+        # print(GlobalStore.public_selecttime)
+        # print(GlobalStore.public_selecttheater)
+
+        self.input_adt.setText('0')
+        self.input_teen.setText('0')
 
         self.input_adt.textChanged.connect(self.checkInput)
         self.input_teen.textChanged.connect(self.checkInput)

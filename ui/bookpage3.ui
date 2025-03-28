@@ -10,6 +10,18 @@
     <height>700</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>700</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -17,10 +29,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A01</string>
@@ -30,10 +48,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A02</string>
@@ -43,10 +67,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B01</string>
@@ -56,10 +86,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B02</string>
@@ -69,10 +105,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D02</string>
@@ -82,10 +124,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C02</string>
@@ -95,10 +143,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C01</string>
@@ -108,10 +162,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D01</string>
@@ -121,10 +181,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E02</string>
@@ -134,10 +200,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E01</string>
@@ -147,10 +219,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B03</string>
@@ -160,10 +238,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C03</string>
@@ -173,10 +257,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A03</string>
@@ -186,10 +276,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E03</string>
@@ -199,10 +295,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D03</string>
@@ -212,10 +314,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C04</string>
@@ -225,10 +333,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B04</string>
@@ -238,10 +352,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D04</string>
@@ -251,10 +371,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E04</string>
@@ -264,10 +390,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A04</string>
@@ -277,10 +409,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D05</string>
@@ -290,10 +428,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E05</string>
@@ -303,10 +447,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A05</string>
@@ -316,10 +466,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C05</string>
@@ -329,10 +485,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B05</string>
@@ -342,10 +504,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D06</string>
@@ -355,10 +523,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C06</string>
@@ -368,10 +542,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A06</string>
@@ -381,10 +561,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E06</string>
@@ -394,10 +580,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B06</string>
@@ -407,10 +599,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C07</string>
@@ -420,10 +618,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E07</string>
@@ -433,10 +637,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B07</string>
@@ -446,10 +656,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A07</string>
@@ -459,10 +675,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D07</string>
@@ -472,10 +694,16 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F06</string>
@@ -485,10 +713,16 @@
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F07</string>
@@ -498,10 +732,16 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F04</string>
@@ -511,10 +751,16 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F03</string>
@@ -524,10 +770,16 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F05</string>
@@ -537,10 +789,16 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F01</string>
@@ -550,10 +808,16 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F02</string>
@@ -563,10 +827,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B09</string>
@@ -576,10 +846,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C09</string>
@@ -589,10 +865,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E08</string>
@@ -602,10 +884,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A09</string>
@@ -615,10 +903,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>450</y>
+     <y>370</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>E09</string>
@@ -628,10 +922,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D08</string>
@@ -641,10 +941,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F09</string>
@@ -654,10 +960,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>500</y>
+     <y>420</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>F08</string>
@@ -667,10 +979,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>250</y>
+     <y>170</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>A08</string>
@@ -680,10 +998,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>350</y>
+     <y>270</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>C08</string>
@@ -693,10 +1017,16 @@
    <property name="geometry">
     <rect>
      <x>850</x>
-     <y>400</y>
+     <y>320</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>D09</string>
@@ -706,10 +1036,16 @@
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>300</y>
+     <y>220</y>
      <width>71</width>
-     <height>51</height>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>B08</string>
@@ -718,11 +1054,17 @@
   <widget class="QPushButton" name="btn_goback">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>81</width>
-     <height>31</height>
+     <x>40</x>
+     <y>40</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>이전페이지</string>
@@ -731,11 +1073,17 @@
   <widget class="QPushButton" name="btn_next">
    <property name="geometry">
     <rect>
-     <x>920</x>
-     <y>670</y>
-     <width>81</width>
-     <height>31</height>
+     <x>840</x>
+     <y>620</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>다음페이지</string>
@@ -745,16 +1093,250 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>60</y>
+     <y>30</y>
      <width>651</width>
      <height>121</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Screen</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test2">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>560</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test5">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>560</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>510</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>선택한 영화</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test1">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>510</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>560</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>청소년 인원</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>510</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>성인 인원</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test3">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>610</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test4">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>510</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>610</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>선택한 관</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>560</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>선택한 시간</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>610</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>좌석</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_test5_2">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>610</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>
