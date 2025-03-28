@@ -699,6 +699,18 @@ class Payment(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("payment.ui", self)
+        
+        for widget in self.findChildren(QLabel):
+            print(widget.objectName())
+
+   
+        self.lbl_selectmovie.setText(GlobalStore.public_selectname)
+        self.lbl_selecttime.setText(GlobalStore.public_selecttime)
+        self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
+       
+        
+
 # class BookPage4(QDialog):
 #     def __init__(self):
 #         super(BookPage4,self).__init__()

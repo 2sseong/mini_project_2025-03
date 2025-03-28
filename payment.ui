@@ -84,7 +84,7 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lbl_selecttheater">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -103,7 +103,7 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="c">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -122,7 +122,7 @@
     <string>최종결제내역</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_selecttheater">
+  <widget class="QLabel" name="lbl_selecttime">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -179,7 +179,7 @@
     <string>좌석</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="lbl_selected_seat">
    <property name="geometry">
     <rect>
      <x>320</x>
