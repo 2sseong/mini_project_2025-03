@@ -34,11 +34,17 @@
   <widget class="QLineEdit" name="input_key">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>180</y>
-     <width>201</width>
-     <height>31</height>
+     <x>40</x>
+     <y>150</y>
+     <width>200</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -60,11 +66,17 @@
   <widget class="QPushButton" name="btn_gotohome">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>75</width>
-     <height>23</height>
+     <x>40</x>
+     <y>40</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>홈으로</string>
@@ -73,11 +85,17 @@
   <widget class="QPushButton" name="btn_search">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>180</y>
-     <width>75</width>
-     <height>23</height>
+     <x>280</x>
+     <y>150</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>예매확인</string>
@@ -99,7 +117,8 @@
        <widget class="QLabel" name="lbl_2">
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <family>NanumGothic</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -114,7 +133,8 @@
        <widget class="QLabel" name="lbl_1">
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <family>NanumGothic</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -132,7 +152,8 @@
        <widget class="QLabel" name="lbl_3">
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <family>NanumGothic</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -147,7 +168,8 @@
        <widget class="QLabel" name="lbl_4">
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <family>NanumGothic</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">

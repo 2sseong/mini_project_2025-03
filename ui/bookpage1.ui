@@ -16,11 +16,17 @@
   <widget class="QPushButton" name="btn_next">
    <property name="geometry">
     <rect>
-     <x>900</x>
-     <y>650</y>
-     <width>75</width>
-     <height>23</height>
+     <x>840</x>
+     <y>620</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>다음페이지</string>
@@ -29,10 +35,10 @@
   <widget class="QPushButton" name="btn_movie1">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>30</y>
-     <width>141</width>
-     <height>181</height>
+     <x>40</x>
+     <y>120</y>
+     <width>140</width>
+     <height>180</height>
     </rect>
    </property>
    <property name="text">
@@ -42,11 +48,17 @@
   <widget class="QPushButton" name="btn_gohome">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>75</width>
-     <height>23</height>
+     <x>40</x>
+     <y>40</y>
+     <width>120</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>홈으로</string>
@@ -55,10 +67,10 @@
   <widget class="QPushButton" name="btn_movie2">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>30</y>
-     <width>141</width>
-     <height>181</height>
+     <x>220</x>
+     <y>120</y>
+     <width>140</width>
+     <height>180</height>
     </rect>
    </property>
    <property name="text">
@@ -68,10 +80,10 @@
   <widget class="QPushButton" name="btn_movie3">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>30</y>
-     <width>141</width>
-     <height>181</height>
+     <x>400</x>
+     <y>120</y>
+     <width>140</width>
+     <height>180</height>
     </rect>
    </property>
    <property name="text">
@@ -81,11 +93,17 @@
   <widget class="QPushButton" name="btn_2time4">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>400</y>
-     <width>141</width>
-     <height>61</height>
+     <x>520</x>
+     <y>480</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -94,11 +112,17 @@
   <widget class="QPushButton" name="btn_1time1">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>290</y>
-     <width>141</width>
-     <height>61</height>
+     <x>40</x>
+     <y>380</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -107,11 +131,17 @@
   <widget class="QPushButton" name="btn_2time1">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>400</y>
-     <width>141</width>
-     <height>61</height>
+     <x>40</x>
+     <y>480</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -120,11 +150,17 @@
   <widget class="QPushButton" name="btn_1time2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>290</y>
-     <width>141</width>
-     <height>61</height>
+     <x>200</x>
+     <y>380</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -133,15 +169,16 @@
   <widget class="QLabel" name="three">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>470</y>
+     <x>40</x>
+     <y>550</y>
      <width>71</width>
-     <height>41</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <family>NanumGothic</family>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="text">
@@ -151,11 +188,17 @@
   <widget class="QPushButton" name="btn_1time3">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>300</y>
-     <width>141</width>
-     <height>61</height>
+     <x>360</x>
+     <y>380</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -164,11 +207,17 @@
   <widget class="QPushButton" name="btn_2time2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>400</y>
-     <width>141</width>
-     <height>61</height>
+     <x>200</x>
+     <y>480</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -177,11 +226,17 @@
   <widget class="QPushButton" name="btn_3time4">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>510</y>
-     <width>141</width>
-     <height>61</height>
+     <x>520</x>
+     <y>580</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -190,11 +245,17 @@
   <widget class="QPushButton" name="btn_3time3">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>510</y>
-     <width>141</width>
-     <height>61</height>
+     <x>360</x>
+     <y>580</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -203,11 +264,17 @@
   <widget class="QPushButton" name="btn_3time1">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>510</y>
-     <width>141</width>
-     <height>61</height>
+     <x>40</x>
+     <y>580</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -216,11 +283,17 @@
   <widget class="QPushButton" name="btn_3time2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>510</y>
-     <width>141</width>
-     <height>61</height>
+     <x>200</x>
+     <y>580</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -229,15 +302,16 @@
   <widget class="QLabel" name="one">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>240</y>
+     <x>40</x>
+     <y>350</y>
      <width>71</width>
-     <height>41</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <family>NanumGothic</family>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="text">
@@ -247,11 +321,17 @@
   <widget class="QPushButton" name="btn_2time3">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>400</y>
-     <width>141</width>
-     <height>61</height>
+     <x>360</x>
+     <y>480</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -260,15 +340,16 @@
   <widget class="QLabel" name="two">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>360</y>
+     <x>40</x>
+     <y>450</y>
      <width>71</width>
-     <height>41</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <family>NanumGothic</family>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="text">
@@ -278,11 +359,17 @@
   <widget class="QPushButton" name="btn_1time4">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>290</y>
-     <width>141</width>
-     <height>61</height>
+     <x>520</x>
+     <y>380</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -291,11 +378,17 @@
   <widget class="QLabel" name="name_movie1">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>220</y>
-     <width>141</width>
-     <height>21</height>
+     <x>40</x>
+     <y>320</y>
+     <width>140</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -307,11 +400,17 @@
   <widget class="QLabel" name="name_movie2">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>220</y>
-     <width>141</width>
-     <height>21</height>
+     <x>220</x>
+     <y>320</y>
+     <width>140</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -323,11 +422,17 @@
   <widget class="QLabel" name="name_movie3">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>220</y>
-     <width>141</width>
-     <height>21</height>
+     <x>400</x>
+     <y>320</y>
+     <width>140</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -339,11 +444,17 @@
   <widget class="QLineEdit" name="input_moviename">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>600</y>
-     <width>571</width>
-     <height>20</height>
+     <x>670</x>
+     <y>125</y>
+     <width>200</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="readOnly">
     <bool>true</bool>
@@ -352,11 +463,17 @@
   <widget class="QLineEdit" name="input_movietime">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>640</y>
-     <width>571</width>
-     <height>20</height>
+     <x>670</x>
+     <y>185</y>
+     <width>200</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="readOnly">
     <bool>true</bool>
@@ -365,50 +482,74 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>600</y>
+     <x>580</x>
+     <y>130</y>
      <width>91</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>선택한 영화 : </string>
+    <string>선택한 영화</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>640</y>
+     <x>580</x>
+     <y>190</y>
      <width>91</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>선택한 시간 : </string>
+    <string>선택한 시간</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>670</y>
+     <x>580</x>
+     <y>250</y>
      <width>91</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>선택한 관 : </string>
+    <string>선택한 관</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="input_theater">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>670</y>
-     <width>571</width>
-     <height>20</height>
+     <x>670</x>
+     <y>245</y>
+     <width>200</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="readOnly">
     <bool>true</bool>

@@ -31,14 +31,20 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lbl_title">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>130</y>
-     <width>121</width>
-     <height>51</height>
+     <x>0</x>
+     <y>0</y>
+     <width>1001</width>
+     <height>211</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>26</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>영화 예매 프로그램</string>
@@ -50,11 +56,17 @@
   <widget class="QPushButton" name="btn_search">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>350</y>
-     <width>75</width>
-     <height>23</height>
+     <x>100</x>
+     <y>250</y>
+     <width>350</width>
+     <height>350</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>20</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>예매 조회</string>
@@ -63,11 +75,17 @@
   <widget class="QPushButton" name="btn_book">
    <property name="geometry">
     <rect>
-     <x>680</x>
-     <y>350</y>
-     <width>75</width>
-     <height>23</height>
+     <x>550</x>
+     <y>250</y>
+     <width>350</width>
+     <height>350</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>20</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>영화 예매</string>
@@ -76,11 +94,17 @@
   <widget class="QPushButton" name="btn_adminlogin">
    <property name="geometry">
     <rect>
-     <x>900</x>
-     <y>660</y>
-     <width>75</width>
-     <height>23</height>
+     <x>870</x>
+     <y>630</y>
+     <width>100</width>
+     <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>관리자</string>
