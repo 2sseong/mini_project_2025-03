@@ -4,6 +4,12 @@ from PyQt5.QtGui import *
 from PyQt5 import QtWidgets, QtGui, uic
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
+import urllib.request
+from urllib.parse import urlparse, parse_qs, unquote
+from PyQt5.QtCore import Qt, pyqtSignal, QSize
+
+# import ssl
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 import cx_Oracle as oci
 
@@ -57,7 +63,7 @@ class MainWindow(QDialog):
             }
         """)
 
-        self.lbl_title.setStyleSheer("color: black;")
+        self.lbl_title.setStyleSheet("color: black;")
 
     def show_admin_login(self):
         dlg = LoginDialog()
@@ -178,46 +184,190 @@ class SearchPage(QDialog):
             self.inplbl_3.setText(str(lst_ticket[0][2]))
             self.inplbl_4.setText(str(lst_ticket[0][3]))
 
-class BookPage1(QDialog):
-    resetLabelSignal = pyqtSignal()
-    def __init__(self):
-        super(BookPage1,self).__init__()
-        loadUi('bookpage1.ui',self)
-        # global public_selectname
-        movielist = []
-        movietime = {1:[],
-                     2:[],
-                     3:[]}
+# class BookPage1(QDialog):
+#     resetLabelSignal = pyqtSignal()
+#     def __init__(self):
+#         super(BookPage1,self).__init__()
+#         loadUi('bookpage1.ui',self)
+#         # global public_selectname
+#         movielist = []
+#         movietime = {1:[],
+#                      2:[],
+#                      3:[]}
         
-        for i in range(len(self.loadName())):
-            movielist.append(self.loadName()[i][0])
+#         for i in range(len(self.loadName())):
+#             movielist.append(self.loadName()[i][0])
 
-        movietime[1].append(self.loadTime()[0][0])
-        movietime[2].append(self.loadTime()[1][0])
-        print(self.loadName()[0])
-        for i in range(len(movielist)):
-            name_movie = getattr(self, f"name_movie{i + 1}")
-            btn_movie = getattr(self,f"btn_movie{i + 1}")
-            name_movie.setText(movielist[i])
-            btn_movie.clicked.connect(lambda _, text = name_movie.text() : self.selectMovieName(text))
-            # public_selectname = self.input_moviename.text()
-            # btn_movie.clicked.connect(self.printName)
+#         movietime[1].append(self.loadTime()[0][0])
+#         movietime[2].append(self.loadTime()[1][0])
+#         print(self.loadName()[0])
+#         for i in range(len(movielist)):
+#             name_movie = getattr(self, f"name_movie{i + 1}")
+#             btn_movie = getattr(self,f"btn_movie{i + 1}")
+#             name_movie.setText(movielist[i])
+#             btn_movie.clicked.connect(lambda _, text = name_movie.text() : self.selectMovieName(text))
+#             # public_selectname = self.input_moviename.text()
+#             # btn_movie.clicked.connect(self.printName)
             
-
-        
-
-   
-        for i in range(len(movietime)):
-            for j in range(len(movietime[i + 1])):
-                btn_time = getattr(self,f"btn_{i + 1}time{j + 1}")
-                btn_time.setText(movietime[i + 1][j])
-                btn_time.clicked.connect(lambda _, text = btn_time.text() : self.selectTime(text))
-                btn_time.clicked.connect(self.selectTheater)
+#         for i in range(len(movietime)):
+#             for j in range(len(movietime[i + 1])):
+#                 btn_time = getattr(self,f"btn_{i + 1}time{j + 1}")
+#                 btn_time.setText(movietime[i + 1][j])
+#                 btn_time.clicked.connect(lambda _, text = btn_time.text() : self.selectTime(text))
+#                 btn_time.clicked.connect(self.selectTheater)
                 
         
-        self.btn_movie1.setIcon(QIcon('eximg.jpg'))
-        self.btn_movie1.setIconSize(self.btn_movie1.size())
+#         self.btn_movie1.setIcon(QIcon('eximg.jpg'))
+#         self.btn_movie1.setIconSize(self.btn_movie1.size())
 
+#         self.input_moviename.textChanged.connect(self.checkInput)
+#         self.input_movietime.textChanged.connect(self.checkInput)
+#         self.input_theater.textChanged.connect(self.checkInput)
+
+#         self.btn_next.setEnabled(False)
+#         self.btn_gohome.clicked.connect(self.goHome)
+#         self.btn_next.clicked.connect(self.goNext)
+
+#         # 시간대 출력
+#         print(movietime)
+
+#     # def printName(self):
+#     #     global public_selectname
+#     #     print(public_selectname) 
+
+#     def selectMovieName(self, movie_name):
+#         self.input_moviename.setText(movie_name)
+
+#     def selectTime(self, time):
+#         self.input_movietime.setText(time)
+
+#     def selectTheater(self,theater):
+#         sender = self.sender()
+#         if sender:
+#             self.input_theater.setText(sender.objectName()[4] + '관')
+        
+#     def printObjectName(self):
+#         sender = self.sender()
+#         if sender:
+#             print(sender.objectName())
+
+#     def goHome(self):
+#         widget.setCurrentIndex(widget.currentIndex()-3)
+        
+#     def goNext(self):
+#         self.resetLabelSignal.emit()
+#         widget.setCurrentIndex(widget.currentIndex()+1)
+
+#     def checkInput(self):
+#         input_moviename = self.input_moviename.text()
+#         input_movietime = self.input_movietime.text()
+#         input_theater = self.input_theater.text()
+
+#         if input_moviename and input_movietime and input_theater:
+#             self.btn_next.setEnabled(True)
+#         else:
+#             self.btn_next.setEnabled(False)
+#         GlobalStore.public_selectname = input_moviename
+#         GlobalStore.public_selecttime = input_movietime
+#         GlobalStore.public_selecttheater = input_theater
+#         # print(GlobalStore.public_selectname)
+#         # print(GlobalStore.public_selecttime)
+#         # print(GlobalStore.public_selecttheater)
+
+#     def loadTime(self):  
+#         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+#         cursor = conn.cursor()
+
+#         conn.begin() 
+
+#         query = '''
+#             SELECT to_char(s.START_TIME , 'HH24:MM') || '~' || to_char(s.END_TIME , 'HH24:MM') AS "TIME"
+#               FROM SCHEDULE s
+#                 '''
+
+#         cursor.execute(query)
+
+#         lst_time = []
+#         for _, item in enumerate(cursor):
+#             lst_time.append(item)
+#         print(lst_time)
+#         cursor.close()
+#         conn.close()
+#         return lst_time
+    
+#     def loadName(self):  
+#         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+#         cursor = conn.cursor()
+
+#         conn.begin() 
+
+#         query = '''
+#           SELECT title
+#             FROM (SELECT *
+#   		            FROM movieinfo
+#                    ORDER BY opening_date)
+#             WHERE rownum <=3
+#                 '''
+
+#         cursor.execute(query)
+
+#         lst_name = []
+#         for _, item in enumerate(cursor):
+#             lst_name.append(item)
+#         print(lst_name)
+#         cursor.close()
+#         conn.close()
+#         return lst_name
+
+class BookPage1(QDialog):
+    resetLabelSignal = pyqtSignal()
+
+    def __init__(self):
+        super(BookPage1, self).__init__()
+        loadUi('bookpage1.ui', self)
+
+        self.movie_id = None  # 선택된 영화의 movie_id 저장
+
+        # 모든 시간 버튼 비활성화
+        for i in range(1, 4):  # 관 1~3
+            for j in range(1, 5):  # 시간 버튼 1~4
+                btn = getattr(self, f"btn_{i}time{j}")
+                btn.setEnabled(False)
+
+        # 영화 리스트 로드 및 버튼 연결
+        self.movielist = self.loadName()
+        for i, (title, movie_id, poster_url) in enumerate(self.movielist):
+            name_movie = getattr(self, f"name_movie{i + 1}")
+            btn_movie = getattr(self, f"btn_movie{i + 1}")
+
+            name_movie.setText(title)
+            btn_movie.clicked.connect(lambda _, t=title: self.selectMovieName(t))
+
+            # 실제 이미지 주소 추출
+            real_url = extract_real_image_url(poster_url)
+            try:
+                image_data = urllib.request.urlopen(real_url).read()
+                pixmap = QPixmap()
+                pixmap.loadFromData(image_data)
+                icon = QIcon(pixmap)
+                btn_movie.setIcon(icon)
+                btn_movie.setIconSize(QSize(120, 180))
+                btn_movie.setMinimumSize(QSize(120, 180))
+            except Exception as e:
+                print(f"이미지 로딩 실패: {poster_url}")
+                print(e)
+
+
+
+        # 시간 버튼 공통 이벤트 연결
+        for i in range(1, 4):
+            for j in range(1, 5):
+                btn_time = getattr(self, f"btn_{i}time{j}")
+                btn_time.clicked.connect(lambda _, b=btn_time: self.selectTime(b.text()))
+                btn_time.clicked.connect(self.selectTheater)
+
+ 
+        # 입력값 감지
         self.input_moviename.textChanged.connect(self.checkInput)
         self.input_movietime.textChanged.connect(self.checkInput)
         self.input_theater.textChanged.connect(self.checkInput)
@@ -226,96 +376,101 @@ class BookPage1(QDialog):
         self.btn_gohome.clicked.connect(self.goHome)
         self.btn_next.clicked.connect(self.goNext)
 
-        # 시간대 출력
-        print(movietime)
-
-    # def printName(self):
-    #     global public_selectname
-    #     print(public_selectname) 
-
     def selectMovieName(self, movie_name):
         self.input_moviename.setText(movie_name)
+        self.movie_id = self.getMovieIdByTitle(movie_name)
+
+        # 관별 시간대 로딩 및 버튼 세팅
+        for hall_num in range(1, 4):
+            times = self.loadTime(hall_num, self.movie_id)
+            for j in range(1, 5):
+                btn_name = f"btn_{hall_num}time{j}"
+                btn = getattr(self, btn_name, None)
+                if btn:
+                    if j <= len(times):
+                        btn.setText(times[j - 1][0])
+                        btn.setEnabled(True)
+                    else:
+                        btn.setText('')
+                        btn.setEnabled(False)
 
     def selectTime(self, time):
         self.input_movietime.setText(time)
 
-    def selectTheater(self,theater):
+    def selectTheater(self):
         sender = self.sender()
         if sender:
             self.input_theater.setText(sender.objectName()[4] + '관')
-        
-    def printObjectName(self):
-        sender = self.sender()
-        if sender:
-            print(sender.objectName())
 
     def goHome(self):
-        widget.setCurrentIndex(widget.currentIndex()-3)
-        
+        widget.setCurrentIndex(widget.currentIndex() - 3)
+
     def goNext(self):
         self.resetLabelSignal.emit()
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def checkInput(self):
         input_moviename = self.input_moviename.text()
         input_movietime = self.input_movietime.text()
         input_theater = self.input_theater.text()
 
-        if input_moviename and input_movietime and input_theater:
-            self.btn_next.setEnabled(True)
-        else:
-            self.btn_next.setEnabled(False)
+        self.btn_next.setEnabled(bool(input_moviename and input_movietime and input_theater))
+
         GlobalStore.public_selectname = input_moviename
         GlobalStore.public_selecttime = input_movietime
         GlobalStore.public_selecttheater = input_theater
-        # print(GlobalStore.public_selectname)
-        # print(GlobalStore.public_selecttime)
-        # print(GlobalStore.public_selecttheater)
 
-    def loadTime(self):  
+    def loadTime(self, hall, movie_id):
         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
         cursor = conn.cursor()
-
-        conn.begin() 
-
         query = '''
-            SELECT to_char(s.START_TIME , 'HH24:MM') || '~' || to_char(s.END_TIME , 'HH24:MM') AS "TIME"
-              FROM SCHEDULE s
-                '''
-
-        cursor.execute(query)
-
-        lst_time = []
-        for _, item in enumerate(cursor):
-            lst_time.append(item)
-        print(lst_time)
+            SELECT to_char(s.start_time, 'HH24:MI') || '~' || to_char(s.end_time, 'HH24:MI') AS time_slot
+              FROM schedule s
+             WHERE s.cnmtheater_id = :hall
+               AND s.movie_id = :movie_id
+            ORDER BY START_TIME
+        '''
+        cursor.execute(query, {'hall': hall, 'movie_id': movie_id})
+        result = cursor.fetchall()
         cursor.close()
         conn.close()
-        return lst_time
+        return result
+
+    def loadName(self):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+        query = '''
+            SELECT title, movie_id, poster
+              FROM (SELECT *
+                      FROM movieinfo
+                     ORDER BY opening_date)
+             WHERE rownum <= 3
+        '''
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return result
+
+    def getMovieIdByTitle(self, title):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+        query = 'SELECT movie_id FROM movieinfo WHERE title = :title'
+        cursor.execute(query, {'title': title})
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return result[0] if result else None
     
-    def loadName(self):  
-        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
-        cursor = conn.cursor()
 
-        conn.begin() 
 
-        query = '''
-          SELECT title
-            FROM (SELECT *
-  		            FROM movieinfo
-                   ORDER BY opening_date)
-            WHERE rownum <=3
-                '''
-
-        cursor.execute(query)
-
-        lst_name = []
-        for _, item in enumerate(cursor):
-            lst_name.append(item)
-        print(lst_name)
-        cursor.close()
-        conn.close()
-        return lst_name
+# 일부로 class BookPage1 바깥에 있음
+def extract_real_image_url(poster_url):
+    parsed = urlparse(poster_url)
+    query = parse_qs(parsed.query)
+    if 'src' in query:
+        return unquote(query['src'][0])
+    return poster_url
 
 
 class BookPage2(QDialog):
@@ -431,3 +586,4 @@ if __name__ == '__main__':
 
     # 결제창에서 회원유무
     # 엔터누르면 확인되게 하는거
+    # 초기화 해라 제발
