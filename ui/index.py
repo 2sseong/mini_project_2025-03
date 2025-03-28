@@ -23,16 +23,17 @@ class GlobalStore:
     public_selectname = ''
     public_selecttime = ''
     public_selecttheater = ''
-    public_adtnumber = ''
-    public_teennumber = ''
+    public_adtnumber = 0
+    public_teennumber = 0
     public_seat = ''
+    public_occupied = ['A01', 'A02']
 
 class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('mainpage.ui',self)
         print(widget.currentIndex())
-        self.setStyleSheet("background-color: #EFF0F5;") # 배경화면 색상
+        self.setStyleSheet("background-color: white;") # 배경화면 색상
 
         self.btn_search.clicked.connect(self.gotoSearch)
         self.btn_book.clicked.connect(self.gotoBookPage)
@@ -40,7 +41,7 @@ class MainWindow(QDialog):
         self.adminButton.clicked.connect(self.show_admin_login)
 
         self.btn_search.setStyleSheet("""
-            btn_search {
+            QPushButton {
                 background-color: #105FFA; /* 버튼 배경색 */
                 color: white;             /* 텍스트 색 */
                 border-radius: 4px;      /* 모서리를 둥글게 */
@@ -48,7 +49,7 @@ class MainWindow(QDialog):
         """)
 
         self.btn_book.setStyleSheet("""
-            btn_book {
+            QPushButton {
                 background-color: #105FFA; /* 버튼 배경색 */
                 color: white;             /* 텍스트 색 */
                 border-radius: 4px;      /* 모서리를 둥글게 */
@@ -56,7 +57,7 @@ class MainWindow(QDialog):
         """)
 
         self.btn_adminlogin.setStyleSheet("""
-            btn_adminlogin {
+            QPushButton {
                 background-color: #105FFA; /* 버튼 배경색 */
                 color: white;             /* 텍스트 색 */
                 border-radius: 4px;      /* 모서리를 둥글게 */
@@ -124,16 +125,6 @@ class AdminPage(QDialog):
     def gotomain(self):
         # 관리자 페이지 1번이므로,  홈으로 돌아오게 하려면 -1
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(widget.currentIndex())
-
-class SearchPage(QDialog):
-    def __init__(self):
-        super(SearchPage,self).__init__()
-        loadUi('searchpage.ui',self)
-        self.btn_gotohome.clicked.connect(self.gohome)
-
-    def gohome(self):
-        widget.setCurrentIndex(widget.currentIndex()-2)
         print(widget.currentIndex())
 
 class SearchPage(QDialog):
@@ -404,6 +395,9 @@ class BookPage1(QDialog):
 
     def goHome(self):
         widget.setCurrentIndex(widget.currentIndex() - 3)
+        self.input_moviename.clear()
+        self.input_movietime.clear()
+        self.input_theater.clear()
 
     def goNext(self):
         self.resetLabelSignal.emit()
@@ -474,6 +468,7 @@ def extract_real_image_url(poster_url):
 
 
 class BookPage2(QDialog):
+    resetLabelSignal = pyqtSignal()
     def __init__(self):
         super(BookPage2,self).__init__()
         loadUi('bookpage2.ui',self)
@@ -502,15 +497,16 @@ class BookPage2(QDialog):
             btn_teen.clicked.connect(self.getTeenNumber)
 
     def resetLabel(self):
-        self.lbl_test1.setText(GlobalStore.public_selectname)
-        self.lbl_test2.setText(GlobalStore.public_selecttime)
-        self.lbl_test3.setText(GlobalStore.public_selecttheater)
+        self.lbl_selectmovie.setText(GlobalStore.public_selectname)
+        self.lbl_selecttime.setText(GlobalStore.public_selecttime)
+        self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
         print(widget.currentIndex())
 
     def goNext(self):
+        self.resetLabelSignal.emit()
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def getAdultNumber(self):
@@ -518,7 +514,8 @@ class BookPage2(QDialog):
         btn = self.sender()
         if btn:
             num_adt = btn.text()
-        self.input_adt.setText(str(num_adt))
+        self.input_adt.setText(num_adt)
+        self.lbl_adtnum.setText(num_adt)
         return num_adt
 
     def getTeenNumber(self):
@@ -527,16 +524,30 @@ class BookPage2(QDialog):
         if btn:
             num_teen = btn.text()
         self.input_teen.setText(num_teen)
+        self.lbl_teennum.setText(num_teen)
         return num_teen
     
     def checkInput(self):
         adt_text = self.input_adt.text()
-        teen_text = self.input_adt.text()
+        teen_text = self.input_teen.text()
 
         if adt_text or teen_text:
             self.btn_next.setEnabled(True)
         else:
             self.btn_next.setEnabled(False)
+
+        GlobalStore.public_adtnumber = adt_text
+        GlobalStore.public_teennumber = teen_text
+
+    def loadOccupied(self, theaternum):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+        query = '''
+            SELECT seat_number
+            FROM seatinfo
+            WHERE CNMTHEATER_ID = :theaternum
+        '''
+        cursor.execute(query, {'theaternum': theaternum})
         
 class BookPage3(QDialog):
     def __init__(self):
@@ -553,12 +564,44 @@ class BookPage3(QDialog):
         self.btn_goback.clicked.connect(self.goBack)
         self.btn_next.clicked.connect(self.goNext)
 
+        # select_theaternum = GlobalStore.public_selecttheater
+        # select_theaternum = int(select_theaternum[0])
+
+        print(GlobalStore.public_occupied)
+
+        # for i in range(len(GlobalStore.public_occupied)):
+
+
+        if GlobalStore.public_occupied[0] == self.seat_A01.text():
+            self.seat_A01.setDisabled(True)
+
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
         print(widget.currentIndex())
 
     def goNext(self):
         widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def resetLabel(self):
+        self.lbl_selectmovie.setText(GlobalStore.public_selectname)
+        self.lbl_selecttime.setText(GlobalStore.public_selecttime)
+        self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(GlobalStore.public_adtnumber)
+        self.lbl_teennum.setText(GlobalStore.public_teennumber)
+
+    def getSeatNum(self,theaternum):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+        query = '''
+            SELECT seat_number
+            FROM seatinfo
+            WHERE CNMTHEATER_ID = :theaternum
+        '''
+        cursor.execute(query, {'theaternum': theaternum})
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        print(result)
     
 # obj = BookPage1()
 # obj.checkInput()
@@ -575,6 +618,7 @@ if __name__ == '__main__':
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
     bookpage1.resetLabelSignal.connect(bookpage2.resetLabel)
+    bookpage2.resetLabelSignal.connect(bookpage3.resetLabel)
     widget.addWidget(mainwindow)
     widget.addWidget(adminPage)
     widget.addWidget(searchpage)
