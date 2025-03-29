@@ -533,6 +533,9 @@ class BookPage2(QDialog):
         GlobalStore.public_adtnumber = adt_text
         GlobalStore.public_teennumber = teen_text
 
+        self.lbl_adtnum.setText(adt_text)
+        self.lbl_teennum.setText(teen_text)
+
      # 예약된 좌석 불러오기 
     def loadOccupiedSeats(self):
         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
@@ -696,7 +699,8 @@ class BookPage3(QDialog):
         cursor.close()
         conn.close()
         # print(result)
-
+    
+ 
 class BookPage4(QDialog):
     resetLabelSignal = pyqtSignal()
     def __init__(self):
@@ -915,6 +919,10 @@ class BookPage5(QDialog):
         self.btn_home.clicked.connect(self.go0page)
 
     def resetpaylabel(self):
+
+        reslist = self.loadResnum()
+        latest_code = reslist[0][0]
+        self.lbl_rescode.setText(latest_code)
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
         self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
@@ -922,6 +930,27 @@ class BookPage5(QDialog):
         self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
         self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber) - 1000}원')
+
+
+    def loadResnum(self):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+
+        query = '''
+        SELECT ticket_code
+        FROM (
+            SELECT ticket_code
+            FROM ticketinfo
+            ORDER BY ticket_id DESC
+        ) sub
+        WHERE ROWNUM = 1
+        '''
+
+        cursor.execute(query) 
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return result
 
     def go0page(self):
         GlobalStore.public_selectname = ''
@@ -936,8 +965,49 @@ class BookPage5(QDialog):
         GlobalStore.public_payfinal = 0
         GlobalStore.public_poster_url = ''
         widget.setCurrentIndex(widget.currentIndex()-7)
-        bookpage1.input_moviename.setText('')
+        #초기화
 
+        #영화 정보들 다 초기화
+        bookpage1.input_moviename.setText('')
+        bookpage1.input_movietime.setText('')
+        bookpage1.input_theater.setText('')
+
+        #시간 선택 초기화
+        for i in range(1, 3 + 1):
+            for j in range(1, 4 + 1):
+                btn = getattr(bookpage1, f"btn_{i}time{j}")
+                btn.setText('')
+                btn.setEnabled(False)
+
+        for i in range(1, 9):
+            getattr(bookpage2, f"btn_adt{i}").setChecked(False)
+            getattr(bookpage2, f"btn_adt{i}").setStyleSheet("")
+            getattr(bookpage2, f"btn_teen{i}").setChecked(False)
+            getattr(bookpage2, f"btn_teen{i}").setStyleSheet("")
+
+        
+
+        bookpage2.lbl_selectmovie.setText('')
+        bookpage2.lbl_selecttime.setText('')
+        bookpage2.lbl_selecttheater.setText('')
+        bookpage2.lbl_adtnum.setText('0')
+        bookpage2.lbl_teennum.setText('0')
+        bookpage2.input_adt.setText('0')
+        bookpage2.input_teen.setText('0')
+
+
+
+    
+    # def goHome(self):
+    #     widget.setCurrentIndex(widget.currentIndex() - 3)
+    #     self.input_moviename.clear()
+    #     self.input_movietime.clear()
+    #     self.input_theater.clear()
+    #     for i in range(1, 4):
+    #         for j in range(1, 5):
+    #             btn = getattr(self, f"btn_{i}time{j}")
+    #             btn.setText('')
+    #             btn.setEnabled(False)
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()

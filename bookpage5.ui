@@ -331,12 +331,12 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="reservation_num">
+  <widget class="QLabel" name="lbl_rescode">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>140</y>
-     <width>81</width>
+     <x>130</x>
+     <y>230</y>
+     <width>511</width>
      <height>21</height>
     </rect>
    </property>
@@ -347,7 +347,7 @@
     </font>
    </property>
    <property name="text">
-    <string>예매 번호</string>
+    <string/>
    </property>
   </widget>
   <widget class="QGraphicsView" name="graphicsView_2">
@@ -439,7 +439,7 @@ rgb(188, 188, 188)</string>
   <zorder>c</zorder>
   <zorder>lbl_total</zorder>
   <zorder>label_2</zorder>
-  <zorder>reservation_num</zorder>
+  <zorder>lbl_rescode</zorder>
   <zorder>graphicsView_2</zorder>
   <zorder>label_3</zorder>
   <zorder>lbl_selected_seat</zorder>
