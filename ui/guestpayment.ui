@@ -286,11 +286,11 @@
     <string>영화 예매 최종 금액</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_payfinal">
+  <widget class="QLabel" name="lbl_total">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>380</y>
+     <x>180</x>
+     <y>430</y>
      <width>250</width>
      <height>12</height>
     </rect>
@@ -388,19 +388,6 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>400</y>
-     <width>241</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>회원 혜택으로 1,000원이 할인되었습니다.</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_12">
    <property name="geometry">
     <rect>
@@ -412,19 +399,6 @@
    </property>
    <property name="text">
     <string>최종 가격</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_finalpay">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>430</y>
-     <width>56</width>
-     <height>12</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
