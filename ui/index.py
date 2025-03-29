@@ -37,38 +37,11 @@ class MainWindow(QDialog):
         super(MainWindow, self).__init__()
         loadUi('mainpage.ui',self)
         # print(widget.currentIndex())
-        self.setStyleSheet("background-color: white;") # 배경화면 색상
 
         self.btn_search.clicked.connect(self.gotoSearch)
         self.btn_book.clicked.connect(self.gotoBookPage)
         self.adminButton = self.findChild(QPushButton, "btn_adminlogin")
         self.adminButton.clicked.connect(self.show_admin_login)
-
-        self.btn_search.setStyleSheet("""
-            QPushButton {
-                background-color: #105FFA; /* 버튼 배경색 */
-                color: white;             /* 텍스트 색 */
-                border-radius: 4px;      /* 모서리를 둥글게 */
-            }
-        """)
-
-        self.btn_book.setStyleSheet("""
-            QPushButton {
-                background-color: #105FFA; /* 버튼 배경색 */
-                color: white;             /* 텍스트 색 */
-                border-radius: 4px;      /* 모서리를 둥글게 */
-            }
-        """)
-
-        self.btn_adminlogin.setStyleSheet("""
-            QPushButton {
-                background-color: #105FFA; /* 버튼 배경색 */
-                color: white;             /* 텍스트 색 */
-                border-radius: 4px;      /* 모서리를 둥글게 */
-            }
-        """)
-
-        self.lbl_title.setStyleSheet("color: black;")
 
     def show_admin_login(self):
         dlg = LoginDialog()
