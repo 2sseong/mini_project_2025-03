@@ -9,6 +9,8 @@ from urllib.parse import urlparse, parse_qs, unquote
 from PyQt5.QtCore import Qt, pyqtSignal, QSize 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+import matplotlib
+matplotlib.rcParams['font.family'] = 'Malgun Gothic'
 
 
 # import ssl
@@ -188,39 +190,43 @@ class SearchPage(QDialog):
         
 
     def startsearch(self):
-        std_ticket_id = self.input_key.text()
-        if std_ticket_id == '':
+        std_ticket_code = self.input_key.text()
+        if std_ticket_code == '':
             QMessageBox.warning(self, '오류', '예매번호를 입력해주세요')
-        elif not std_ticket_id.isdigit():   #예매번호 숫자 외에 입력시
+        elif not std_ticket_code.isdigit():   #예매번호 숫자 외에 입력시
             QMessageBox.warning(self, '오류', '예매번호는 숫자만 입력해주세요')
         else:
-            self.loadData(std_ticket_id) 
+            self.loadData(std_ticket_code) 
 
-    def loadData(self, std_ticket_id):  
+    def loadData(self, std_ticket_code):  
         conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
         cursor = conn.cursor()
 
         conn.begin() 
 
         query = '''
-           SELECT t.TICKET_ID
-                , t.user_id
-                , g.name, m.title
-                , to_char(s.START_TIME,'yyyy-mm-dd')
-                , LISTAGG(i.seat_number, ', ') WITHIN GROUP (ORDER BY i.seat_number)
-                , count(*)
-             FROM TICKETINFO t, schedule s, gallery g, movieinfo m, ticketseat h, SEATINFO i
-            WHERE t.USER_ID = g.USER_ID
-              AND s.MOVIE_ID = m.MOVIE_ID
-              AND t.SCHEDULE_ID = s.SCHEDULE_ID 
-              AND t.TICKET_ID = h.TICKET_ID
-              AND i.SEATINFO_ID = h.SEATINFO_ID
-              AND t.ticket_id = :v_std_ticket_id
-            GROUP BY t.TICKET_ID, t.user_id, g.name, m.title, s.START_TIME
-            ORDER BY t.TICKET_ID
+                SELECT t.user_id
+                    , g.name
+                    , m.title
+                    , to_char(s.START_TIME,'YYYY-MM-DD')
+                    , to_char(s.START_TIME,'HH24:MI') || '~' || to_char(s.END_TIME,'HH24:MI')
+                    , LISTAGG(i.seat_number, ', ') WITHIN GROUP (ORDER BY i.seat_number)
+                    , count(*)
+                 FROM TICKETINFO t, schedule s, gallery g, movieinfo m, ticketseat h, SEATINFO i
+                WHERE t.USER_ID = g.USER_ID
+                  AND s.MOVIE_ID = m.MOVIE_ID
+                  AND t.SCHEDULE_ID = s.SCHEDULE_ID 
+                  AND t.TICKET_ID = h.TICKET_ID
+                  AND i.SEATINFO_ID = h.SEATINFO_ID
+                  AND t.ticket_code = :v_std_ticket_code
+                GROUP BY t.user_id,
+                        g.name,
+                        m.title,
+                        TO_CHAR(s.START_TIME,'YYYY-MM-DD'),
+                        TO_CHAR(s.START_TIME, 'HH24:MI') || '~' || TO_CHAR(s.END_TIME, 'HH24:MI')
                 '''
 
-        cursor.execute(query, {'v_std_ticket_id': str(std_ticket_id)})
+        cursor.execute(query, {'v_std_ticket_code': str(std_ticket_code)})
 
         lst_ticket = cursor.fetchall()
         # print(lst_ticket)        
@@ -235,7 +241,7 @@ class SearchPage(QDialog):
             self.tbl_search.setModel(None)
             return
         model = QStandardItemModel()
-        model.setHorizontalHeaderLabels(['티켓ID', '회원ID', '예약자명', '영화제목', '상영시간', '좌석','인원 수'])
+        model.setHorizontalHeaderLabels(['회원ID', '예약자명', '영화제목','상영날짜', '상영시간', '좌석','인원 수'])
         for row in lst_ticket:
             items = [QStandardItem(str(col)) for col in row]
             model.appendRow(items)
