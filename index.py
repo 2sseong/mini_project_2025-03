@@ -29,6 +29,8 @@ class GlobalStore:
     public_occupied = []
     public_personinfo = []
     public_theaterprice = 0
+    public_payfinal = 0
+    public_poster_url = ''
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -123,6 +125,43 @@ class AdminPage(QDialog):
         loadUi('adminpage.ui', self)    
 
         self.btn_go_to_main.clicked.connect(self.gotomain)
+        self.btn_sales.clicked.connect(self.Sales)
+    
+    def Sales(self):
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+
+        conn.begin() 
+
+        query = '''
+           SELECT to_char(sum(amount),'999,999,999,999')
+             FROM pay
+                '''
+
+        cursor.execute(query)
+
+        self.lbl_total.setText(f'{cursor.fetchone()[0]}원')
+
+        cursor.close()
+        conn.close()
+
+    def makeTable(self,lst_ticket):
+        if not lst_ticket:  #예매번호 없을때 
+            QMessageBox.warning(self, '오류', '예매번호가 없어요')
+            self.tbl_search.setModel(None)
+            return
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(['티켓ID', '회원ID', '예약자명', '영화제목', '상영시간', '좌석','인원 수'])
+        for row in lst_ticket:
+            items = [QStandardItem(str(col)) for col in row]
+            model.appendRow(items)
+
+        self.tbl_search.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tbl_search.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tbl_search.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tbl_search.setSortingEnabled(True)
+        self.tbl_search.setModel(model)
+
     
     def gotomain(self):
         # 관리자 페이지 1번이므로,  홈으로 돌아오게 하려면 -1
@@ -204,8 +243,6 @@ class SearchPage(QDialog):
         self.tbl_search.setSortingEnabled(True)
         self.tbl_search.setModel(model)
 
-
-
 class BookPage1(QDialog):
     resetLabelSignal = pyqtSignal()
 
@@ -214,6 +251,20 @@ class BookPage1(QDialog):
         loadUi('bookpage1.ui', self)
 
         self.movie_id = None  # 선택된 영화의 movie_id 저장
+        # 수정 버튼 테두리 없어짐
+        self.btn_movie1.setStyleSheet("""                     
+                        QPushButton {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+                                      
+                        QPushButton:hover {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+        """)
 
         # 모든 시간 버튼 비활성화
         for i in range(1, 4):  # 관 1~3
@@ -240,6 +291,7 @@ class BookPage1(QDialog):
                 btn_movie.setIcon(icon)
                 btn_movie.setIconSize(QSize(120, 180))
                 btn_movie.setMinimumSize(QSize(120, 180))
+                
             except Exception as e:
                 print(f"이미지 로딩 실패: {poster_url}")
                 print(e)
@@ -264,6 +316,14 @@ class BookPage1(QDialog):
     def selectMovieName(self, movie_name):
         self.input_moviename.setText(movie_name)
         self.movie_id = self.getMovieIdByTitle(movie_name)
+
+        # 포스터 URL 전역 저장
+        for title, movie_id, poster_url in self.movielist: 
+            if title == movie_name:
+                #수정
+                real_url = extract_real_image_url(poster_url)      
+                GlobalStore.public_poster_url = real_url
+                break
 
         # 관별 시간대 로딩 및 버튼 세팅
         for hall_num in range(1, 4):
@@ -302,6 +362,7 @@ class BookPage1(QDialog):
     def goNext(self):
         self.resetLabelSignal.emit()
         widget.setCurrentIndex(widget.currentIndex() + 1)
+        print(GlobalStore.public_poster_url)
         # print(GlobalStore.public_selecttheater)
 
     def checkInput(self):
@@ -658,8 +719,9 @@ class BookPage4(QDialog):
         self.btn_guest.clicked.connect(self.guestInformation)
 
     def userInformation(self):
-        dlg = Payment() #payment클래스 쓰기위한 변수
+        dlg = userPayment() #payment클래스 쓰기위한 변수
         user_id = self.input_userid.text()
+        GlobalStore.public_personinfo.append(user_id)
         if user_id == '':
             QMessageBox.warning(self, "입력 누락", "모든 정보를 입력해주세요")
             return
@@ -689,7 +751,7 @@ class BookPage4(QDialog):
                 )
                 for i in result:
                     GlobalStore.public_personinfo.append(i)
-                print(GlobalStore.public_personinfo[0])
+                # print(GlobalStore.public_personinfo[0])
                 dlg.exec() == QDialog.Accepted
                 widget.setCurrentIndex(widget.currentIndex()+5) 
             else:
@@ -699,7 +761,7 @@ class BookPage4(QDialog):
             QMessageBox.critical(self, "DB 오류", str(e))
 
     def guestInformation(self): 
-        dlg = Payment()
+        dlg = guestPayment()
         guest_name = self.input_name.text() or None
         guest_phone = self.input_phone.text()
         guest_birth = self.input_birth.text() or None
@@ -726,10 +788,10 @@ class BookPage4(QDialog):
         widget.setCurrentIndex(widget.currentIndex()-1)
         # print(widget.currentIndex())
 
-class Payment(QDialog):
+class userPayment(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi("payment.ui", self)
+        uic.loadUi("userpayment.ui", self)
         
         # for widget in self.findChildren(QLabel):
         #     print(widget.objectName())
@@ -742,23 +804,70 @@ class Payment(QDialog):
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
         self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
         self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
-        self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000)* int(GlobalStore.public_teennumber)}원')
+        self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
+        self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber) - 1000}원')
+        
+        # image_data = urllib.request.urlopen(GlobalStore.public_poster_url).read()
+        # pixmap = QPixmap()
+        # pixmap.loadFromData(image_data)
+        # icon = QIcon(pixmap)
+        # self.btn_poster.setIcon(icon)
+        # self.btn_poster.setIconSize(QSize(120, 180))
+        # self.btn_poster.setMinimumSize(QSize(120, 180))
+        # self.btn_poster.setStyleSheet("""                     
+        #                 QPushButton {
+        #                        background-color: none;  /* 배경색 변경 방지 */
+        #                         color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+        #                         border: none;  /* 테두리 없애기 */
+        #                 }
+                                      
+        #                 QPushButton:hover {
+        #                        background-color: none;  /* 배경색 변경 방지 */
+        #                         color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+        #                         border: none;  /* 테두리 없애기 */
+        #                 }
+        # """)
 
-        # self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000)* int(GlobalStore.public_teennumber)}원')
+class guestPayment(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("guestpayment.ui", self)
+        
+        # for widget in self.findChildren(QLabel):
+        #     print(widget.objectName())
 
+        self.lbl_selectmovie.setText(GlobalStore.public_selectname)
+        self.lbl_selecttime.setText(GlobalStore.public_selecttime)
+        self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
+        self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
+        self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
+        self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
+        self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
+        self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
+        # self.btn_movie1.setStyleSheet("""                     
+        #                 QPushButton {
+        #                        background-color: none;  /* 배경색 변경 방지 */
+        #                         color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+        #                         border: none;  /* 테두리 없애기 */
+        #                 }
+                                      
+        #                 QPushButton:hover {
+        #                        background-color: none;  /* 배경색 변경 방지 */
+        #                         color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+        #                         border: none;  /* 테두리 없애기 */
+        #                 }
+        # """)
 
-        # input_pay
-        # lbl_change
+class BookPage5(QDialog):
+    def __init__(self):
+        super(BookPage5,self).__init__()
+        loadUi('bookpage5.ui',self)
 
-# class BookPage5(QDialog):
-#     def __init__(self):
-#         super(BookPage4,self).__init__()
-#         loadUi('bookpage4.ui',self)
+    #     self.btn_goback.clicked.connect(self.goBack)
 
-#         self.btn_goback.clicked.connect(self.goBack)
-
-#     def goBack(self):
-#         widget.setCurrentIndex(widget.currentIndex()-1)
+    # def goBack(self):
+    #     widget.setCurrentIndex(widget.currentIndex()-1)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -770,7 +879,9 @@ if __name__ == '__main__':
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
     bookpage4 = BookPage4()
-    payment = Payment()
+    bookpage5 = BookPage5()
+    userpayment = userPayment()
+    guestpayment = guestPayment()
     bookpage1.resetLabelSignal.connect(bookpage2.resetLabel)
     bookpage2.resetLabelSignal.connect(bookpage3.resetLabel)
     widget.addWidget(mainwindow)
@@ -780,10 +891,9 @@ if __name__ == '__main__':
     widget.addWidget(bookpage2)
     widget.addWidget(bookpage3)
     widget.addWidget(bookpage4)
-    widget.addWidget(payment)
+    widget.addWidget(bookpage5)
+    widget.addWidget(userpayment)
+    widget.addWidget(guestpayment)
     widget.show()
     app.exec_()
-
-    # 결제창에서 회원유무
-    # 엔터누르면 확인되게 하는거
-    # 초기화 해라 제발
+    

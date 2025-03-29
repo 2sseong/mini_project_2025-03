@@ -50,7 +50,7 @@
     <string/>
    </property>
    <property name="placeholderText">
-    <string>예매번호를 입력해주세요</string>
+    <string>티켓ID 입력해주세요</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_gotohome">
