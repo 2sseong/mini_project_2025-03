@@ -13,16 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>141</width>
-     <height>192</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
@@ -270,7 +260,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>0</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -401,7 +391,7 @@
     <string>최종 가격</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_payenter">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -411,7 +401,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>지불</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_poster">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>141</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
