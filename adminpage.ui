@@ -117,6 +117,16 @@
     </item>
    </layout>
   </widget>
+  <widget class="QWidget" name="graph_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>269</y>
+     <width>681</width>
+     <height>401</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

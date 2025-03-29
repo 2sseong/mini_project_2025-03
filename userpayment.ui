@@ -260,7 +260,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>0</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -417,7 +417,7 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_payenter">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -427,7 +427,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>지불</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_poster">
