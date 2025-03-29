@@ -28,6 +28,7 @@ class GlobalStore:
     public_seat = []
     public_occupied = []
     public_personinfo = []
+    public_theaterprice = 0
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -140,12 +141,9 @@ class SearchPage(QDialog):
 
     def gohome(self):
         self.input_key.clear()
-        labels = self.findChildren(QLabel)
-        for label in labels:
-            if label.objectName().startswith("inplbl_"):
-                label.setText("")         #홈으로가면 Label, LineEdit 초기화
+        self.tbl_search.setModel(None)
         widget.setCurrentIndex(widget.currentIndex()-2)
-        print(widget.currentIndex())
+        
 
     def startsearch(self):
         std_ticket_id = self.input_key.text()
@@ -163,19 +161,27 @@ class SearchPage(QDialog):
         conn.begin() 
 
         query = '''
-           SELECT t.TICKET_ID, t.user_id, g.name, m.title, s.START_TIME, t.youth
-             FROM TICKETINFO t, schedule s, gallery g, movieinfo m
+           SELECT t.TICKET_ID
+                , t.user_id
+                , g.name, m.title
+                , to_char(s.START_TIME,'yyyy-mm-dd')
+                , LISTAGG(i.seat_number, ', ') WITHIN GROUP (ORDER BY i.seat_number)
+                , count(*)
+             FROM TICKETINFO t, schedule s, gallery g, movieinfo m, ticketseat h, SEATINFO i
             WHERE t.USER_ID = g.USER_ID
-              AND t.SCHEDULE_ID = s.SCHEDULE_ID 
               AND s.MOVIE_ID = m.MOVIE_ID
-              AND g.USER_ID = :v_std_ticket_id
+              AND t.SCHEDULE_ID = s.SCHEDULE_ID 
+              AND t.TICKET_ID = h.TICKET_ID
+              AND i.SEATINFO_ID = h.SEATINFO_ID
+              AND t.ticket_id = :v_std_ticket_id
+            GROUP BY t.TICKET_ID, t.user_id, g.name, m.title, s.START_TIME
             ORDER BY t.TICKET_ID
                 '''
 
         cursor.execute(query, {'v_std_ticket_id': str(std_ticket_id)})
 
         lst_ticket = cursor.fetchall()
-        print(lst_ticket)        
+        # print(lst_ticket)        
         self.makeTable(lst_ticket)
 
         cursor.close()
@@ -187,12 +193,12 @@ class SearchPage(QDialog):
             self.tbl_search.setModel(None)
             return
         model = QStandardItemModel()
-        model.setHorizontalHeaderLabels(['티켓ID', '회원ID', '이름', '영화제목', '상영시간', '청소년 수'])
+        model.setHorizontalHeaderLabels(['티켓ID', '회원ID', '예약자명', '영화제목', '상영시간', '좌석','인원 수'])
         for row in lst_ticket:
             items = [QStandardItem(str(col)) for col in row]
             model.appendRow(items)
 
-        self.tbl_search.resizeColumnsToContents()
+        self.tbl_search.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tbl_search.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tbl_search.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tbl_search.setSortingEnabled(True)
@@ -296,7 +302,7 @@ class BookPage1(QDialog):
     def goNext(self):
         self.resetLabelSignal.emit()
         widget.setCurrentIndex(widget.currentIndex() + 1)
-        print(GlobalStore.public_selecttheater)
+        # print(GlobalStore.public_selecttheater)
 
     def checkInput(self):
         input_moviename = self.input_moviename.text()
@@ -400,12 +406,13 @@ class BookPage2(QDialog):
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(GlobalStore.public_selecttheater,GlobalStore.public_selectname,GlobalStore.public_selecttime)
+        # print(GlobalStore.public_selecttheater,GlobalStore.public_selectname,GlobalStore.public_selecttime)
         # print(widget.currentIndex())
 
     def goNext(self):
         # 예약된 좌석 불러오기
         self.loadOccupiedSeats()
+        self.loadTheaterPrice()
         self.resetLabelSignal.emit()
         widget.setCurrentIndex(widget.currentIndex()+1)
 
@@ -496,7 +503,7 @@ class BookPage2(QDialog):
         time = GlobalStore.public_selecttime
         theater = int(GlobalStore.public_selecttheater[0])  # '1관' → 1
 
-        print(title, time, theater)
+        # print(title, time, theater)
 
         cursor.execute(query, {'title': title, 'time': time, 'theater': theater})
         result = cursor.fetchall()
@@ -505,6 +512,29 @@ class BookPage2(QDialog):
         # 결과를 전역변수에 저장
         for row in result:
             GlobalStore.public_occupied.append(row[0])
+
+    def loadTheaterPrice(self):
+        try:
+            theater = GlobalStore.public_selecttheater[:1]
+            conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+            cursor = conn.cursor()
+
+            query = '''
+                    SELECT price
+                    FROM cnmtheater
+                    WHERE cnmtheater_id = :v_theater
+            '''
+
+            cursor.execute(query, {'v_theater': theater})
+            result = cursor.fetchone()
+            # print(result[0])
+            GlobalStore.public_theaterprice = result[0]
+            # print(GlobalStore.public_theaterprice)
+            cursor.close()
+            conn.close()
+
+        except Exception as e:
+            QMessageBox.critical(self, "DB 오류", str(e))
         
 class BookPage3(QDialog):
     def __init__(self):
@@ -574,7 +604,7 @@ class BookPage3(QDialog):
         widget.setCurrentIndex(widget.currentIndex()-1)
         GlobalStore.public_seat = []
         GlobalStore.public_occupied = []
-        print(GlobalStore.public_occupied)
+        # print(GlobalStore.public_occupied)
         buttons = self.findChildren(QPushButton)
         for i in range(len(buttons) - 2):
             seatbtn1 = getattr(self, f'seat_{i + 1}')
@@ -615,9 +645,10 @@ class BookPage3(QDialog):
         result = cursor.fetchall()
         cursor.close()
         conn.close()
-        print(result)
+        # print(result)
 
 class BookPage4(QDialog):
+    resetLabelSignal = pyqtSignal()
     def __init__(self):
         super(BookPage4,self).__init__()
         loadUi('bookpage4.ui',self)
@@ -645,7 +676,7 @@ class BookPage4(QDialog):
 
             cursor.execute(query, {'v_user_id': user_id})
             result = cursor.fetchone()
-            print(result)
+            # print(result)
             cursor.close()
             conn.close()
 
@@ -689,29 +720,37 @@ class BookPage4(QDialog):
         dlg.exec() == QDialog.Accepted
         widget.setCurrentIndex(widget.currentIndex()+5) 
             
-        print(GlobalStore.public_personinfo)
+        # print(GlobalStore.public_personinfo)
 
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
-        print(widget.currentIndex())
+        # print(widget.currentIndex())
 
 class Payment(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("payment.ui", self)
         
-        for widget in self.findChildren(QLabel):
-            print(widget.objectName())
+        # for widget in self.findChildren(QLabel):
+        #     print(widget.objectName())
 
-   
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
         self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
+        self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
-       
-        
+        self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
+        self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
+        self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000)* int(GlobalStore.public_teennumber)}원')
 
-# class BookPage4(QDialog):
+        # self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000)* int(GlobalStore.public_teennumber)}원')
+
+
+        # input_pay
+        # lbl_change
+
+# class BookPage5(QDialog):
 #     def __init__(self):
 #         super(BookPage4,self).__init__()
 #         loadUi('bookpage4.ui',self)

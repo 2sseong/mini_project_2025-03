@@ -163,8 +163,8 @@
   <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>200</y>
+     <x>190</x>
+     <y>250</y>
      <width>91</width>
      <height>20</height>
     </rect>
@@ -182,8 +182,8 @@
   <widget class="QLabel" name="lbl_selected_seat">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>200</y>
+     <x>300</x>
+     <y>250</y>
      <width>200</width>
      <height>25</height>
     </rect>
@@ -209,6 +209,183 @@
    </property>
    <property name="text">
     <string>결제하기</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>480</y>
+     <width>56</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>거스름돈</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_payexplain2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>340</y>
+     <width>250</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_payexplain1">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>310</y>
+     <width>250</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_pay">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>430</y>
+     <width>113</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_change">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>480</y>
+     <width>56</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>310</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>영화 예매 최종 금액</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_payfinal">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>380</y>
+     <width>250</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>430</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>지불 금액 입력</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>220</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>청소년 인원</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_teennum">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>220</y>
+     <width>200</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>190</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>성인 인원</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_adtnum">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>180</y>
+     <width>200</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>
