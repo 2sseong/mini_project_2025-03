@@ -286,11 +286,11 @@
     <string>영화 예매 최종 금액</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_payfinal">
+  <widget class="QLabel" name="lbl_total">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>380</y>
+     <x>180</x>
+     <y>430</y>
      <width>250</width>
      <height>12</height>
     </rect>
@@ -414,12 +414,12 @@
     <string>최종 가격</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_finalpay">
+  <widget class="QLabel" name="lbl_payfinal">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>430</y>
-     <width>56</width>
+     <x>170</x>
+     <y>370</y>
+     <width>250</width>
      <height>12</height>
     </rect>
    </property>

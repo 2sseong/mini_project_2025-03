@@ -7,6 +7,8 @@ from PyQt5.QtCore import Qt, pyqtSignal
 import urllib.request
 from urllib.parse import urlparse, parse_qs, unquote
 from PyQt5.QtCore import Qt, pyqtSignal, QSize 
+from datetime import datetime
+
 
 # import ssl
 # ssl._create_default_https_context = ssl._create_unverified_context
@@ -29,7 +31,171 @@ class GlobalStore:
     public_occupied = []
     public_personinfo = []
     public_theaterprice = 0
+    public_payfinal = 0
     public_poster_url = ''
+    public_user_id = ''
+
+# 결제 insert문 전역함수
+
+# 결제 insert문 전역함수
+
+def insert_payment_ticket():
+    # 영수증 코드 생성 함수 (예: PAY202503290001)
+    def generate_payment_code():
+        today = datetime.now().strftime("%Y%m%d")
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+        cursor.execute("SELECT NVL(MAX(pay_id), 0) + 1 FROM pay")
+        next_id = cursor.fetchone()[0]
+        cursor.close()
+        conn.close()
+        return f'PAY{today}{str(next_id).zfill(4)}', next_id
+
+    # 예매번호 생성 함수: 전화번호 뒤 4자리 + 종료시간(HHMM) + 관 ID
+    def generate_ticket_code(phone_number, end_time, theater_id):
+        phone_suffix = phone_number[-4:]
+        time_str = end_time.strftime('%H%M')
+        return f'{phone_suffix}{time_str}{theater_id}'
+
+    # 회원 여부 판단 (전역 user_id 기준)
+    user_id = GlobalStore.public_user_id
+    is_member = bool(user_id)  # 0이거나 빈 문자열이면 False
+    if is_member:
+        user_id = int(user_id)
+
+    # DB 연결
+    conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+    cursor = conn.cursor()
+
+    try:
+        user_info = GlobalStore.public_personinfo
+
+        # 공통 정보
+        phone = user_info[1] if not is_member else user_info[1]  # 회원일 경우도 phone 필요
+        theater_id = int(GlobalStore.public_selecttheater[0])
+        title = GlobalStore.public_selectname
+        time_slot = GlobalStore.public_selecttime
+        adt = int(GlobalStore.public_adtnumber)
+        teen = int(GlobalStore.public_teennumber)
+        seat_list = GlobalStore.public_seat
+        price = GlobalStore.public_theaterprice
+        final_amount = price * adt + (price - 2000) * teen
+
+        # 상영 시간 분리
+        start_time_str, end_time_str = time_slot.split('~')
+
+        # 스케줄 ID 및 종료시간 조회
+        cursor.execute("""
+            SELECT schedule_id, end_time
+            FROM schedule s
+            JOIN movieinfo m ON s.movie_id = m.movie_id
+            WHERE m.title = :title
+              AND TO_CHAR(s.start_time, 'HH24:MI') = :start_time
+              AND TO_CHAR(s.end_time, 'HH24:MI') = :end_time
+              AND s.cnmtheater_id = :theater_id
+        """, {
+            'title': title,
+            'start_time': start_time_str,
+            'end_time': end_time_str,
+            'theater_id': theater_id
+        })
+        schedule_id, end_time = cursor.fetchone()
+
+        # 비회원이면 user_id 생성 + gallery insert
+        if not is_member:
+            cursor.execute("SELECT NVL(MAX(user_id), 101) + 1 FROM gallery")
+            user_id = cursor.fetchone()[0]
+
+            name = user_info[0]
+            phone = user_info[1]
+            birth_str = user_info[2]
+            gender = user_info[3]
+
+            if birth_str:
+                birth_date = datetime.strptime(birth_str, '%Y-%m-%d').date()
+            else:
+                birth_date = None
+
+            cursor.execute("""
+                INSERT INTO gallery(user_id, name, phone_number, birth_date, gender, role_id)
+                VALUES (:user_id, :name, :phone_number, :birth_date, :g_val, 3)
+            """, {
+                'user_id': user_id,
+                'name': name,
+                'phone_number': phone,
+                'birth_date': birth_date,
+                'g_val': gender
+            })
+
+        # 결제 코드, pay_id 생성
+        payment_code, pay_id = generate_payment_code()
+
+        # ticket_id, 예매번호 생성
+        cursor.execute("SELECT NVL(MAX(ticket_id), 301) + 1 FROM ticketinfo")
+        ticket_id = cursor.fetchone()[0]
+        ticket_code = generate_ticket_code(phone, end_time, theater_id)
+
+        # 좌석 ID 리스트 조회
+        seatinfo_ids = []
+        for seat in seat_list:
+            cursor.execute("""
+                SELECT seatinfo_id
+                FROM seatinfo
+                WHERE seat_number = :seat_number AND cnmtheater_id = :cnmtheater_id
+            """, {'seat_number': seat, 'cnmtheater_id': theater_id})
+            seatinfo_id = cursor.fetchone()[0]
+            seatinfo_ids.append(seatinfo_id)
+
+        # pay insert
+        cursor.execute("""
+            INSERT INTO pay(pay_id, payment_code, user_id, payment_date, amount)
+            VALUES (:pay_id, :code, :user_id, SYSDATE, :amount)
+        """, {'pay_id': pay_id, 'code': payment_code, 'user_id': user_id, 'amount': final_amount})
+
+        # ticketinfo insert
+        cursor.execute("""
+            INSERT INTO ticketinfo(ticket_id, ticket_code, schedule_id, user_id, adult, youth)
+            VALUES (:ticket_id, :ticket_code, :schedule_id, :user_id, :adult_cnt, :youth_cnt)
+        """, {
+            'ticket_id': ticket_id,
+            'ticket_code': ticket_code,
+            'schedule_id': schedule_id,
+            'user_id': user_id,
+            'adult_cnt': adt,
+            'youth_cnt': teen
+        })
+
+        # ticketseat insert
+        for seatinfo_id in seatinfo_ids:
+            cursor.execute("""
+                INSERT INTO ticketseat(ticket_id, seatinfo_id)
+                VALUES (:tid, :sid)
+            """, {'tid': ticket_id, 'sid': seatinfo_id})
+
+        # ticketpay insert
+        cursor.execute("""
+            INSERT INTO ticketpay(pay_id, ticket_id)
+            VALUES (:pay_id, :ticket_id)
+        """, {'pay_id': pay_id, 'ticket_id': ticket_id})
+
+        # 커밋 및 알림
+        conn.commit()
+        QMessageBox.information(None, "성공", f"예매 완료\n예매번호: {ticket_code}\n영수증 코드: {payment_code}")
+
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        conn.rollback()
+        QMessageBox.critical(None, "DB 오류", f"{str(e)}\n\n{tb}")
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
+
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -661,8 +827,10 @@ class BookPage4(QDialog):
         self.btn_guest.clicked.connect(self.guestInformation)
 
     def userInformation(self):
-        dlg = Payment() #payment클래스 쓰기위한 변수
+        dlg = userPayment() #payment클래스 쓰기위한 변수
         user_id = self.input_userid.text()
+        GlobalStore.public_personinfo.append(user_id)
+        GlobalStore.public_user_id = user_id # 추가한 코드
         if user_id == '':
             QMessageBox.warning(self, "입력 누락", "모든 정보를 입력해주세요")
             return
@@ -692,7 +860,7 @@ class BookPage4(QDialog):
                 )
                 for i in result:
                     GlobalStore.public_personinfo.append(i)
-                print(GlobalStore.public_personinfo[0])
+                # print(GlobalStore.public_personinfo[0])
                 dlg.exec() == QDialog.Accepted
                 widget.setCurrentIndex(widget.currentIndex()+5) 
             else:
@@ -702,7 +870,7 @@ class BookPage4(QDialog):
             QMessageBox.critical(self, "DB 오류", str(e))
 
     def guestInformation(self): 
-        dlg = Payment()
+        dlg = guestPayment()
         guest_name = self.input_name.text() or None
         guest_phone = self.input_phone.text()
         guest_birth = self.input_birth.text() or None
@@ -729,10 +897,10 @@ class BookPage4(QDialog):
         widget.setCurrentIndex(widget.currentIndex()-1)
         # print(widget.currentIndex())
 
-class Payment(QDialog):
+class userPayment(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi("payment.ui", self)
+        uic.loadUi("userpayment.ui", self)
         
         # for widget in self.findChildren(QLabel):
         #     print(widget.objectName())
@@ -740,12 +908,52 @@ class Payment(QDialog):
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
         self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
+        self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
         self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
         self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
+        self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
+        self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber) - 1000}원')
+        self.btn_pay.clicked.connect(insert_payment_ticket)
 
 
 
+
+class guestPayment(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("guestpayment.ui", self)
+        
+
+        self.lbl_selectmovie.setText(GlobalStore.public_selectname)
+        self.lbl_selecttime.setText(GlobalStore.public_selecttime)
+        self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
+        self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
+        self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
+        self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
+        self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
+        self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
+        self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
+        self.btn_pay.clicked.connect(insert_payment_ticket)
+
+
+
+
+
+
+
+
+
+class BookPage5(QDialog):
+    def __init__(self):
+        super(BookPage5,self).__init__()
+        loadUi('bookpage5.ui',self)
+
+    #     self.btn_goback.clicked.connect(self.goBack)
+
+    # def goBack(self):
+    #     widget.setCurrentIndex(widget.currentIndex()-1)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -757,7 +965,9 @@ if __name__ == '__main__':
     bookpage2 = BookPage2()
     bookpage3 = BookPage3()
     bookpage4 = BookPage4()
-    payment = Payment()
+    bookpage5 = BookPage5()
+    userpayment = userPayment()
+    guestpayment = guestPayment()
     bookpage1.resetLabelSignal.connect(bookpage2.resetLabel)
     bookpage2.resetLabelSignal.connect(bookpage3.resetLabel)
     widget.addWidget(mainwindow)
@@ -767,10 +977,9 @@ if __name__ == '__main__':
     widget.addWidget(bookpage2)
     widget.addWidget(bookpage3)
     widget.addWidget(bookpage4)
-    widget.addWidget(payment)
+    widget.addWidget(bookpage5)
+    widget.addWidget(userpayment)
+    widget.addWidget(guestpayment)
     widget.show()
     app.exec_()
-
-    # 결제창에서 회원유무
-    # 엔터누르면 확인되게 하는거
-    # 초기화 해라 제발
+    
