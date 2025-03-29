@@ -30,6 +30,7 @@ class GlobalStore:
     public_personinfo = []
     public_theaterprice = 0
     public_payfinal = 0
+    public_poster_url = ''
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -804,8 +805,4 @@ if __name__ == '__main__':
     widget.addWidget(guestpayment)
     widget.show()
     app.exec_()
-
-    # 결제창에서 회원유무
-    # 초기화 해라 제발
-    # 좌석 수정해라 ㅄ아
-    # 날짜 형 변환해라 ㅄ아
+    
