@@ -141,12 +141,10 @@ class AdminPage(QDialog):
 
     def Sales(self):
         self.loadData()
-        # 예시 데이터
-        titles = ['영화1', '영화2', '영화3']
-        counts = [10, 20, 15]
+        self.loadCount()
 
         self.ax.clear()
-        self.ax.bar(titles, counts, color='skyblue')
+        self.ax.bar(self.title, self.count, color='skyblue')
         self.ax.set_title('영화별 예매 수')
         self.ax.set_xlabel('영화 제목')
         self.ax.set_ylabel('예매 수')
@@ -168,6 +166,34 @@ class AdminPage(QDialog):
 
         total = cursor.fetchone()[0]
         self.lbl_total.setText(f'{total}원')
+     
+    def loadCount(self):
+        self.title = []
+        self.count =[]
+        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+        cursor = conn.cursor()
+
+        conn.begin() 
+
+        query = '''
+                SELECT m.title
+                    , count(*)
+                FROM MOVIEINFO m 
+                    , SCHEDULE s 
+                    , TICKETINFO t 
+                    , TICKETSEAT i
+                WHERE m.MOVIE_ID = s.MOVIE_ID
+                AND s.schedule_id = t.schedule_id
+                AND t.TICKET_ID  = i.TICKET_ID
+                GROUP BY m.title
+                ORDER BY m.title
+                '''
+        cursor.execute(query)
+        for i in cursor.fetchall():
+            self.count.append(i[1])
+            self.title.append(i[0])
+        print(self.title)
+        print(self.count)
 
     def gotomain(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
