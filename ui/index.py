@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, pyqtSignal
 import urllib.request
 from urllib.parse import urlparse, parse_qs, unquote
-from PyQt5.QtCore import Qt, pyqtSignal, QSize 
+from PyQt5.QtCore import Qt, pyqtSignal, QSize, QObject, QEvent  # ✅ 여기 추가!
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib
@@ -25,6 +25,13 @@ port = 1521
 username = 'movie'
 password = '1234'
 
+# ESC 방지용
+class EscBlocker(QObject):
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Escape:
+            return True  # ESC 무시
+        return super().eventFilter(obj, event)
+
 class GlobalStore:
     public_selectname = ''
     public_selecttime = ''
@@ -41,8 +48,10 @@ class GlobalStore:
     public_ticket_code = ''
     public_final_price = 0  # ✅ 총 결제 금액 저장용 전역변수
 
-# 결제 insert문 전역함수
 
+
+
+# 결제 insert문 전역함수
 def insert_payment_ticket():
     # 영수증 코드 생성 함수 (예: PAY202503290001)
     def generate_payment_code():
@@ -240,6 +249,8 @@ class MainWindow(QDialog):
         user_id = self.user_id.text()
         user_pw = self.user_pw.text()
         print("성공적으로 로그인되었습니다.", user_id, user_pw)
+
+
 
 
 
@@ -982,15 +993,17 @@ class userPayment(QDialog):
             print(e)
 
     def getPayEnter(self):
-        # print(int(self.input_pay.text()),int(self.lbl_total.text()[:-1]))
         if self.input_pay.text() == '':
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
+            self.btn_pay.setEnabled(True)  # ✅ 정상 금액 입력 후 결제 가능
 
     def goReceipt2(self):
         # 돈을 안 넣었을 경우
@@ -1062,11 +1075,15 @@ class guestPayment(QDialog):
         if self.input_pay.text() == '':
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
+            self.btn_pay.setEnabled(True)  # ✅ 정상 금액 입력 후 결제 가능
+
 
     def goReceipt2(self):
             # 돈을 안 넣었을 경우
@@ -1160,6 +1177,9 @@ class BookPage5(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    # 🔒 여기 추가: 앱 전체에 Esc 무력화 필터 설치
+    esc_blocker = EscBlocker()
+    app.installEventFilter(esc_blocker)
     widget = QtWidgets.QStackedWidget()
     mainwindow = MainWindow()
     adminPage = AdminPage()
