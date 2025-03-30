@@ -3,17 +3,15 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import QtWidgets, QtGui, uic
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QSize, QObject, QEvent
 import urllib.request
 from urllib.parse import urlparse, parse_qs, unquote
-from PyQt5.QtCore import Qt, pyqtSignal, QSize 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib
-matplotlib.rcParams['font.family'] = 'Malgun Gothic'
 from datetime import datetime
 
-
+matplotlib.rcParams['font.family'] = 'Malgun Gothic'
 # import ssl
 # ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -24,6 +22,13 @@ host = '210.119.14.60'
 port = 1521
 username = 'movie'
 password = '1234'
+
+# ESC 방지용
+class EscBlocker(QObject):
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Escape:
+            return True  # ESC 무시
+        return super().eventFilter(obj, event)
 
 class GlobalStore:
     public_selectname = ''
@@ -1068,7 +1073,7 @@ class userPayment(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("userpayment.ui", self)
-        self.btn_pay.setEnabled(False)
+        self.btn_pay.setDisabled(True)
         self.btn_pay.clicked.connect(self.goReceipt2)
         
         # for widget in self.findChildren(QLabel):
@@ -1090,20 +1095,6 @@ class userPayment(QDialog):
         self.lbl_payexplain2.setText(f'청소년 가격 : {teen_price}원')
         self.lbl_total.setText(f'{total}원')
 
-        self.btn_poster.setStyleSheet("""                     
-                        QPushButton {
-                               background-color: none;  /* 배경색 변경 방지 */
-                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
-                                border: none;  /* 테두리 없애기 */
-                        }
-                                      
-                        QPushButton:hover {
-                               background-color: none;  /* 배경색 변경 방지 */
-                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
-                                border: none;  /* 테두리 없애기 */
-                        }
-        """)
-
         self.btn_payenter.clicked.connect(self.getPayEnter)
 
         real_url = extract_real_image_url(GlobalStore.public_poster_url)
@@ -1119,20 +1110,100 @@ class userPayment(QDialog):
             print(f"이미지 로딩 실패: {GlobalStore.public_poster_url}")
             print(e)
 
+###CSS###
+        self.btn_poster.setStyleSheet("""                     
+                        QPushButton {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+                                      
+                        QPushButton:hover {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+        """)
+        self.btn_pay.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
+###CSS###
+
     def getPayEnter(self):
         if self.input_pay.text() == '':
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
-            self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
+            self.btn_pay.setDisabled(True)  # ❗ 실패 시 다시 비활성화
+            self.btn_pay.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
             return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
-            self.btn_pay.setEnabled(False)
+            self.btn_pay.setDisabled(True)
+            self.btn_pay.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
             return
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
-            self.btn_pay.setEnabled(True)  # ✅ 정상 금액 입력 후 결제 가능
+            self.btn_pay.setDisabled(False)  # ✅ 정상 금액 입력 후 결제 가능
+            self.btn_pay.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
 
     def goReceipt2(self):
         # 돈을 안 넣었을 경우
@@ -1307,6 +1378,8 @@ class BookPage5(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    esc_blocker = EscBlocker()
+    app.installEventFilter(esc_blocker)
     widget = QtWidgets.QStackedWidget()
     mainwindow = MainWindow()
     adminPage = AdminPage()
