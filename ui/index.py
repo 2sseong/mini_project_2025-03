@@ -684,6 +684,36 @@ class BookPage2(QDialog):
         self.lbl_teennum.setText(str(GlobalStore.public_teennumber))
 
     def goBack(self):
+        for i in range(1,9):
+            btn_adt = getattr(self, f"btn_adt{i}")
+            btn_teen = getattr(self, f"btn_teen{i}")
+
+            GlobalStore.public_adtnumber = "0"
+            GlobalStore.public_teennumber = "0"
+            self.input_adt.setText('0')
+            self.input_teen.setText('0')
+            btn_adt.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+            btn_teen.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+            btn_adt.setChecked(True)
+            btn_teen.setChecked(True)
         widget.setCurrentIndex(widget.currentIndex()-1)
         # print(GlobalStore.public_selecttheater,GlobalStore.public_selectname,GlobalStore.public_selecttime)
         # print(widget.currentIndex())
@@ -1134,8 +1164,8 @@ class userPayment(QDialog):
             color: white;
             border-radius: 4;}
             QPushButton:disabled {
-            border: 1px solid #151820;
-            color: #151820;
+            border: 1px solid #31343E;
+            color: #31343E;
             background:transparent;
             border-radius: 4;
             }
@@ -1147,63 +1177,15 @@ class userPayment(QDialog):
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
             self.btn_pay.setDisabled(True)  # ❗ 실패 시 다시 비활성화
-            self.btn_pay.setStyleSheet("""
-            QPushButton{
-            background: qlineargradient(
-                                x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF2E29,
-                                stop: 1 #8E2824
-                            );
-            color: white;
-            border-radius: 4;}
-            QPushButton:disabled {
-            border: 1px solid #151820;
-            color: #151820;
-            background:transparent;
-            border-radius: 4;
-            }
-        """)
             return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
             self.btn_pay.setDisabled(True)
-            self.btn_pay.setStyleSheet("""
-            QPushButton{
-            background: qlineargradient(
-                                x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF2E29,
-                                stop: 1 #8E2824
-                            );
-            color: white;
-            border-radius: 4;}
-            QPushButton:disabled {
-            border: 1px solid #151820;
-            color: #151820;
-            background:transparent;
-            border-radius: 4;
-            }
-        """)
             return
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
             self.btn_pay.setDisabled(False)  # ✅ 정상 금액 입력 후 결제 가능
-            self.btn_pay.setStyleSheet("""
-            QPushButton{
-            background: qlineargradient(
-                                x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF2E29,
-                                stop: 1 #8E2824
-                            );
-            color: white;
-            border-radius: 4;}
-            QPushButton:disabled {
-            border: 1px solid #151820;
-            color: #151820;
-            background:transparent;
-            border-radius: 4;
-            }
-        """)
 
     def goReceipt2(self):
         # 돈을 안 넣었을 경우
@@ -1270,6 +1252,37 @@ class guestPayment(QDialog):
         except Exception as e:
             print(f"이미지 로딩 실패: {GlobalStore.public_poster_url}")
             print(e)
+###CSS###
+        self.btn_poster.setStyleSheet("""                     
+                        QPushButton {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+                                      
+                        QPushButton:hover {
+                               background-color: none;  /* 배경색 변경 방지 */
+                                color: black;  /* 텍스트 색상 유지 (필요 시 조정) */
+                                border: none;  /* 테두리 없애기 */
+                        }
+        """)
+        self.btn_pay.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #31343E;
+            color: #31343E;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
+###CSS###
 
     def getPayEnter(self):
         if self.input_pay.text() == '':

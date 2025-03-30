@@ -299,7 +299,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:white;</string>
+    <string notr="true">background:white;color:black;</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_change">

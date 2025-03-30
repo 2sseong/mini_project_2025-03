@@ -60,7 +60,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>청소년 인원</string>
@@ -82,7 +82,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -104,7 +104,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>선택한 영화</string>
@@ -126,7 +126,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>성인 인원</string>
@@ -148,7 +148,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>선택한 시간</string>
@@ -170,7 +170,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -192,7 +192,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>선택한 관</string>
@@ -214,7 +214,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -236,7 +236,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -258,7 +258,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>좌석</string>
@@ -280,7 +280,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -304,7 +304,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>최종 금액</string>
@@ -326,7 +326,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -385,7 +385,8 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;
+background:#151820;</string>
    </property>
    <property name="text">
     <string>예매 번호</string>
@@ -410,7 +411,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(216, 17, 17);</string>
+    <string notr="true">color:rgb(216, 17, 17);background:#151820;</string>
    </property>
    <property name="text">
     <string>위의 예매번호로 무인발권기에서 티켓 출력 후 입장하세요.</string>
@@ -432,7 +433,7 @@ border-radius: 4px;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;background:#151820;</string>
    </property>
    <property name="text">
     <string>asd</string>
@@ -447,6 +448,9 @@ border-radius: 4px;</string>
      <height>160</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -454,20 +458,25 @@ border-radius: 4px;</string>
   <widget class="QLabel" name="lbl_rescode">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>140</y>
-     <width>331</width>
+     <x>120</x>
+     <y>180</y>
+     <width>491</width>
      <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>나눔고딕</family>
-     <pointsize>12</pointsize>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background:#151820;color:white;</string>
+   </property>
    <property name="text">
-    <string/>
+    <string>1234</string>
    </property>
   </widget>
   <zorder>graphicsView</zorder>
