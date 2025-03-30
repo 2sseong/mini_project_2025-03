@@ -198,28 +198,6 @@ border-radius: 4px;</string>
     <string>선택한 관</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_seat">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>520</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>NanumGothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:white;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLabel" name="lbl_selecttime">
    <property name="geometry">
     <rect>
@@ -413,20 +391,6 @@ border-radius: 4px;</string>
     <string>예매 번호</string>
    </property>
   </widget>
-  <widget class="QGraphicsView" name="graphicsView_2">
-   <property name="geometry">
-    <rect>
-     <x>730</x>
-     <y>120</y>
-     <width>131</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background:
-rgb(188, 188, 188)</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
@@ -474,6 +438,38 @@ rgb(188, 188, 188)</string>
     <string>asd</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_poster">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>120</y>
+     <width>130</width>
+     <height>160</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_rescode">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>140</y>
+     <width>331</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>나눔고딕</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>graphicsView</zorder>
   <zorder>btn_home</zorder>
   <zorder>label_8</zorder>
@@ -483,7 +479,6 @@ rgb(188, 188, 188)</string>
   <zorder>label_6</zorder>
   <zorder>lbl_selectmovie</zorder>
   <zorder>label_4</zorder>
-  <zorder>lbl_seat</zorder>
   <zorder>lbl_selecttime</zorder>
   <zorder>lbl_adtnum</zorder>
   <zorder>label_9</zorder>
@@ -492,9 +487,10 @@ rgb(188, 188, 188)</string>
   <zorder>lbl_total</zorder>
   <zorder>label_2</zorder>
   <zorder>reservation_num</zorder>
-  <zorder>graphicsView_2</zorder>
   <zorder>label_3</zorder>
   <zorder>lbl_selected_seat</zorder>
+  <zorder>btn_poster</zorder>
+  <zorder>lbl_rescode</zorder>
  </widget>
  <resources/>
  <connections/>
