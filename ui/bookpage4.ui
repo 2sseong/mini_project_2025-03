@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:#24242C;</string>
+  </property>
   <widget class="QPushButton" name="btn_goback">
    <property name="geometry">
     <rect>
@@ -27,6 +30,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #ffffff,
+                    stop: 1 #dddddd
+                );
+color: black;
+border-radius:4;</string>
    </property>
    <property name="text">
     <string>이전 페이지</string>
@@ -85,6 +97,9 @@
      <pointsize>15</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="title">
     <string>회원 정보 입력</string>
    </property>
@@ -102,6 +117,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>NanumGothic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>회원번호 입력:</string>
          </property>
@@ -127,16 +148,26 @@
    <widget class="QPushButton" name="btn_user">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>140</x>
       <y>430</y>
-      <width>171</width>
-      <height>31</height>
+      <width>120</width>
+      <height>40</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 4px;
+</string>
     </property>
     <property name="text">
      <string>입력 완료</string>
@@ -158,6 +189,9 @@
      <pointsize>15</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="title">
     <string>비회원 정보 입력</string>
    </property>
@@ -175,6 +209,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>NanumGothic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>전화번호 입력:</string>
          </property>
@@ -187,6 +227,9 @@
            <family>NanumGothic</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;</string>
          </property>
          <property name="inputMask">
           <string/>
@@ -205,8 +248,14 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>NanumGothic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>      이름 입력:</string>
+          <string>       이름 입력:</string>
          </property>
         </widget>
        </item>
@@ -217,6 +266,9 @@
            <family>NanumGothic</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;</string>
          </property>
          <property name="inputMask">
           <string/>
@@ -235,6 +287,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <family>NanumGothic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>생년월일 입력:</string>
          </property>
@@ -247,6 +305,9 @@
            <family>NanumGothic</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;</string>
          </property>
          <property name="inputMask">
           <string/>
@@ -265,8 +326,14 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>NanumGothic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>      성별 입력:</string>
+          <string>       성별 입력:</string>
          </property>
         </widget>
        </item>
@@ -277,6 +344,9 @@
            <family>NanumGothic</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;</string>
          </property>
          <property name="inputMask">
           <string/>
@@ -296,16 +366,25 @@
    <widget class="QPushButton" name="btn_guest">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>150</x>
       <y>430</y>
-      <width>171</width>
-      <height>31</height>
+      <width>120</width>
+      <height>40</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 4px;</string>
     </property>
     <property name="text">
      <string>입력 완료</string>
