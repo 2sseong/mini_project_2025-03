@@ -41,7 +41,7 @@ color: black;
 border-radius:4;</string>
    </property>
    <property name="text">
-    <string>이전 페이지</string>
+    <string>이전페이지</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_adtnum">

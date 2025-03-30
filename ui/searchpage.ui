@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:#24242C;
+color:white;</string>
+  </property>
   <widget class="QLineEdit" name="input_key">
    <property name="geometry">
     <rect>
@@ -45,6 +49,10 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:white;
+color:black;</string>
    </property>
    <property name="text">
     <string/>
@@ -68,6 +76,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #ffffff,
+                    stop: 1 #dddddd
+                );
+color: black;
+border-radius:4;</string>
+   </property>
    <property name="text">
     <string>홈으로</string>
    </property>
@@ -87,6 +104,15 @@
      <pointsize>11</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string>예매확인</string>
    </property>
@@ -102,7 +128,16 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTableView" name="tbl_search"/>
+     <widget class="QTableView" name="tbl_search">
+      <property name="styleSheet">
+       <string notr="true">QHeaderView::section{
+background:#151820;
+color:white;
+};
+color:white;
+</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

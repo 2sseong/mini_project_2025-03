@@ -38,6 +38,8 @@ class GlobalStore:
     public_payfinal = 0
     public_poster_url = ''
     public_user_id = ''
+    public_ticket_code = ''
+    public_final_price = 0  # ✅ 총 결제 금액 저장용 전역변수
 
 # 결제 insert문 전역함수
 
@@ -54,10 +56,10 @@ def insert_payment_ticket():
         return f'PAY{today}{str(next_id).zfill(4)}', next_id
 
     # 예매번호 생성 함수: 전화번호 뒤 4자리 + 종료시간(HHMM) + 관 ID
-    def generate_ticket_code(phone_number, end_time, theater_id):
+    def generate_ticket_code(phone_number, end_time, theater_id, seatinfo_id):
         phone_suffix = phone_number[-4:]
         time_str = end_time.strftime('%H%M')
-        return f'{phone_suffix}{time_str}{theater_id}'
+        return f'{phone_suffix}{time_str}{theater_id}{seatinfo_id}'
 
     # 회원 여부 판단 (전역 user_id 기준)
     user_id = GlobalStore.public_user_id
@@ -135,7 +137,8 @@ def insert_payment_ticket():
         # ticket_id, 예매번호 생성
         cursor.execute("SELECT NVL(MAX(ticket_id), 301) + 1 FROM ticketinfo")
         ticket_id = cursor.fetchone()[0]
-        ticket_code = generate_ticket_code(phone, end_time, theater_id)
+        ticket_code = generate_ticket_code(phone, end_time, theater_id, seat_list[0])
+
 
         # 좌석 ID 리스트 조회
         seatinfo_ids = []
@@ -147,6 +150,11 @@ def insert_payment_ticket():
             """, {'seat_number': seat, 'cnmtheater_id': theater_id})
             seatinfo_id = cursor.fetchone()[0]
             seatinfo_ids.append(seatinfo_id)
+        # ✅ 첫 번째 seatinfo_id 사용해서 예매번호 생성
+        first_seat_id = seatinfo_ids[0]
+        ticket_code = generate_ticket_code(phone, end_time, theater_id, first_seat_id)
+        GlobalStore.public_ticket_code = ticket_code  # ✅ 전역변수에 저장!
+
 
         # pay insert
         cursor.execute("""
@@ -232,17 +240,69 @@ class MainWindow(QDialog):
         user_id = self.user_id.text()
         user_pw = self.user_pw.text()
         print("성공적으로 로그인되었습니다.", user_id, user_pw)
-
-
-
+# 총 매출 조회
+def loadData():
+    adminPage.lbl_total.setText("")
+    conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+    cursor = conn.cursor()
+    conn.begin() 
+    query = '''
+       SELECT to_char(SUM(amount), '999,999,999,999') 
+         FROM pay
+            '''
+    cursor.execute(query)
+    total = cursor.fetchone()[0]
+    adminPage.lbl_total.setText(f'{total}원')
+ 
+# 인원 조회
+def loadCount():
+    title = []
+    count =[]
+    conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
+    cursor = conn.cursor()
+    conn.begin() 
+    query = '''
+            SELECT m.title
+                , count(*)
+            FROM MOVIEINFO m 
+                , SCHEDULE s 
+                , TICKETINFO t 
+                , TICKETSEAT i
+            WHERE m.MOVIE_ID = s.MOVIE_ID
+            AND s.schedule_id = t.schedule_id
+            AND t.TICKET_ID  = i.TICKET_ID
+            GROUP BY m.title
+            ORDER BY m.title
+            '''
+    cursor.execute(query)
+    for i in cursor.fetchall():
+        count.append(i[1])
+        title.append(i[0])
+    cursor.close()
+    conn.close()
+    return count, title
+def  graphSales():
+    adminPage.canvas = FigureCanvas(Figure(figsize=(5, 3)))
+    adminPage.ax = adminPage.canvas.figure.add_subplot(111)
+    layout = QVBoxLayout(adminPage.graph_widget)
+    layout.addWidget(adminPage.canvas)
+    adminPage.ax.clear()
+    counts, titles = loadCount()
+    print(counts,titles)
+    adminPage.ax.bar(titles, counts, color='skyblue')
+    adminPage.ax.set_title('영화별 예매 수')
+    adminPage.ax.set_xlabel('영화 제목')
+    adminPage.ax.set_ylabel('예매 수')
+    adminPage.ax.tick_params(axis='x', rotation=0)
+    adminPage.canvas.draw()
+  
 class LoginDialog(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("admin_login.ui", self)
 
         self.btn_ok.clicked.connect(self.check_login)
-        #self.btnCancel.clicked.connect(self.reject)
-
+        
     def check_login(self):
         user_id = self.user_id.text()
         user_pw = self.user_pw.text()
@@ -250,7 +310,11 @@ class LoginDialog(QDialog):
         #관리자 계정 로그인
         if user_id == "admin" and user_pw == "1234":
             QMessageBox.information(self, "로그인 성공", "로그인에 성공했습니다!")
+            loadData()
+            loadCount()
+            graphSales()
             self.accept()
+            
         else:
             QMessageBox.warning(self, "로그인 실패", "아이디 또는 비밀번호가 틀렸습니다.")
 
@@ -259,45 +323,7 @@ class AdminPage(QDialog):
         super(AdminPage, self).__init__()
         loadUi("adminpage.ui", self)
 
-        # FigureCanvas 생성해서 QDesigner에서 만든 QWidget에 붙이기
-        self.canvas = FigureCanvas(Figure(figsize=(5, 3)))
-        self.ax = self.canvas.figure.add_subplot(111)
-
-        layout = QVBoxLayout(self.graph_widget)  # ← Qt Designer에서 만든 QWidget
-        layout.addWidget(self.canvas)
-
-        self.btn_sales.clicked.connect(self.Sales)
         self.btn_go_to_main.clicked.connect(self.gotomain)
-
-    def Sales(self):
-        self.loadData()
-        # 예시 데이터
-        titles = ['영화1', '영화2', '영화3']
-        counts = [10, 20, 15]
-
-        self.ax.clear()
-        self.ax.bar(titles, counts, color='skyblue')
-        self.ax.set_title('영화별 예매 수')
-        self.ax.set_xlabel('영화 제목')
-        self.ax.set_ylabel('예매 수')
-        self.ax.tick_params(axis='x', rotation=45)
-        self.canvas.draw()
-
-    def loadData(self):
-        conn = oci.connect(f'{username}/{password}@{host}:{port}/{sid}')
-        cursor = conn.cursor()
-
-        conn.begin() 
-
-        query = '''
-           SELECT to_char(SUM(amount), '999,999,999,999') 
-             FROM pay
-                '''
-
-        cursor.execute(query)
-
-        total = cursor.fetchone()[0]
-        self.lbl_total.setText(f'{total}원')
 
     def gotomain(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
@@ -438,6 +464,25 @@ class BookPage1(QDialog):
         self.btn_next.setEnabled(False)
         self.btn_gohome.clicked.connect(self.goHome)
         self.btn_next.clicked.connect(self.goNext)
+############################# CSS #########################################
+        self.btn_next.setStyleSheet("""
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            QPushButton {
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4px;
+            }
+        """)
+###########################################################################
 
     def selectMovieName(self, movie_name):
         self.input_moviename.setText(movie_name)
@@ -582,6 +627,50 @@ class BookPage2(QDialog):
             btn_adt.clicked.connect(self.btn_Activate)
             btn_teen.clicked.connect(self.btn_Activate)
 
+#############################CSS#################################
+        for i in range(1, 9):
+            btn_adt = getattr(self, f"btn_adt{i}")
+            btn_teen = getattr(self, f"btn_teen{i}")
+            btn_adt.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+            btn_teen.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+        
+        self.btn_next.setStyleSheet("""
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            QPushButton {
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4px;
+            }
+        """)
+#############################CSS#################################
+
     def resetLabel(self):
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
@@ -630,12 +719,23 @@ class BookPage2(QDialog):
                     if btn != clicked_btn:
                         btn.setChecked(False)
                         btn.setStyleSheet("")
-                clicked_btn.setStyleSheet("background-color: gray;")
+                clicked_btn.setStyleSheet("background-color: #219652;")
                 self.input_adt.setText(clicked_btn.text())
                 GlobalStore.public_adtnumber = clicked_btn.text()
                 self.adt_text = clicked_btn.text()
             else:
-                clicked_btn.setStyleSheet("")
+                for i in range(1, 9):
+                    btn_adt = getattr(self, f"btn_adt{i}")
+                    btn_adt.setStyleSheet("""
+                    QPushButton{
+                    background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #31343E,
+                                stop: 1 #2C2F3F
+                            );
+                    color: white;
+                    border-radius: 2px;}
+                    """)
                 self.input_adt.setText("0")
                 GlobalStore.public_adtnumber = "0"
                 self.adt_text = "0"
@@ -647,12 +747,23 @@ class BookPage2(QDialog):
                     if btn != clicked_btn:
                         btn.setChecked(False)
                         btn.setStyleSheet("")
-                clicked_btn.setStyleSheet("background-color: gray;")
+                clicked_btn.setStyleSheet("background-color: #219652;")
                 self.input_teen.setText(clicked_btn.text())
                 GlobalStore.public_teennumber = clicked_btn.text()
                 self.teen_text = clicked_btn.text()
             else:
-                clicked_btn.setStyleSheet("")
+                for i in range(1, 9):
+                    btn_teen = getattr(self, f"btn_teen{i}")
+                    btn_teen.setStyleSheet("""
+                    QPushButton{
+                    background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #31343E,
+                                stop: 1 #2C2F3F
+                            );
+                    color: white;
+                    border-radius: 2px;}
+                    """)
                 self.input_teen.setText("0")
                 self.teen_text = "0"
         self.checkInput()
@@ -661,10 +772,7 @@ class BookPage2(QDialog):
         adt_text = self.input_adt.text()
         teen_text = self.input_teen.text()
 
-        if adt_text or teen_text:
-            self.btn_next.setEnabled(True)
-        else:
-            self.btn_next.setEnabled(False)
+        self.btn_next.setEnabled(adt_text != "0" or teen_text != "0")
 
         GlobalStore.public_adtnumber = adt_text
         GlobalStore.public_teennumber = teen_text
@@ -741,6 +849,44 @@ class BookPage3(QDialog):
             seatbtn = getattr(self, f'seat_{i + 1}')
             seatbtn.clicked.connect(lambda _, sb=seatbtn: self.selectSeat(sb.text()))
 
+#############################CSS#################################
+        buttons = self.findChildren(QPushButton)
+        for i in range(len(buttons) - 2):
+            btn_seat = getattr(self,f'seat_{i + 1}')
+            btn_seat.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            """)
+        self.btn_next.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                                x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF2E29,
+                                stop: 1 #8E2824
+                            );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+        """)
+#############################CSS#################################
+
     def selectSeat(self,text):
         temp = []
         GlobalStore.public_seat = []
@@ -772,9 +918,9 @@ class BookPage3(QDialog):
                             # print(seatbtn)
                             seatbtn2.setStyleSheet(
                                 """QPushButton{
-                                background-color: black;
+                                background-color: #219652;
                                 color: white;
-                                border-radius: 4px;
+                                border-radius: 4;
                                 }"""
                             )
 
@@ -922,10 +1068,17 @@ class userPayment(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("userpayment.ui", self)
-        self.btn_pay.clicked.connect(self.goReceipt2) 
+        self.btn_pay.setEnabled(False)
+        self.btn_pay.clicked.connect(self.goReceipt2)
         
         # for widget in self.findChildren(QLabel):
         #     print(widget.objectName())
+
+        # 총 금액 계산
+        adt_price = GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)
+        teen_price = (GlobalStore.public_theaterprice - 2000) * int(GlobalStore.public_teennumber)
+        total = adt_price + teen_price - 1000  # -1000은 할인 금액
+        GlobalStore.public_final_price = total  # ✅ 전역변수에 저장
 
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
@@ -933,11 +1086,9 @@ class userPayment(QDialog):
         self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
         self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
-        self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
-        self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
-        # self.lbl_payfinal.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
-        self.lbl_total.setText(f'{GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber) - 1000}원')
-        self.btn_pay.clicked.connect(insert_payment_ticket)
+        self.lbl_payexplain1.setText(f'성인 가격 : {adt_price}원')
+        self.lbl_payexplain2.setText(f'청소년 가격 : {teen_price}원')
+        self.lbl_total.setText(f'{total}원')
 
         self.btn_poster.setStyleSheet("""                     
                         QPushButton {
@@ -969,18 +1120,28 @@ class userPayment(QDialog):
             print(e)
 
     def getPayEnter(self):
-        # print(int(self.input_pay.text()),int(self.lbl_total.text()[:-1]))
         if self.input_pay.text() == '':
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
+            return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)
+            return
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
+            self.btn_pay.setEnabled(True)  # ✅ 정상 금액 입력 후 결제 가능
 
     def goReceipt2(self):
-        bookpage5.resetpaylabel()
+        # 돈을 안 넣었을 경우
+        if self.input_pay.text() == '' or int(self.input_pay.text()) < GlobalStore.public_final_price:
+            QMessageBox.warning(self, "경고", "결제 금액을 정확히 입력해주세요.")
+            return
+        
+        insert_payment_ticket()  # 실제 결제 처리
+        bookpage5.resetpaylabel() # 전역변수 가져오기
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.accept()
     
@@ -989,10 +1150,14 @@ class guestPayment(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("guestpayment.ui", self)
+        self.btn_pay.setEnabled(False)
         self.btn_pay.clicked.connect(self.goReceipt2) 
         
-        # for widget in self.findChildren(QLabel):
-        #     print(widget.objectName())
+        # 총 금액 계산
+        adt_price = GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)
+        teen_price = (GlobalStore.public_theaterprice - 2000) * int(GlobalStore.public_teennumber)
+        total = adt_price + teen_price - 1000  # -1000은 할인 금액
+        GlobalStore.public_final_price = total  # ✅ 전역변수에 저장
 
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
@@ -1000,10 +1165,9 @@ class guestPayment(QDialog):
         self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
         self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
-        self.lbl_payexplain1.setText(f'성인 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)}원')
-        self.lbl_payexplain2.setText(f'청소년 가격 : {GlobalStore.public_theaterprice * int(GlobalStore.public_teennumber) - 2000 * int(GlobalStore.public_teennumber)}원')
-        self.lbl_total.setText(f'{GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
-        self.btn_pay.clicked.connect(insert_payment_ticket)
+        self.lbl_payexplain1.setText(f'성인 가격 : {adt_price}원')
+        self.lbl_payexplain2.setText(f'청소년 가격 : {teen_price}원')
+        self.lbl_total.setText(f'{total}원')
 
         self.btn_payenter.clicked.connect(self.getPayEnter)
 
@@ -1040,13 +1204,24 @@ class guestPayment(QDialog):
         if self.input_pay.text() == '':
             QMessageBox.warning(self, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
+            return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
             QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.btn_pay.setEnabled(False)
+            return
         else:
             self.lbl_change.setText(str(int(self.input_pay.text()) - int(self.lbl_total.text()[:-1])) + '원')
+            self.btn_pay.setEnabled(True)  # ✅ 정상 금액 입력 후 결제 가능
 
     def goReceipt2(self):
+            # 돈을 안 넣었을 경우
+        if self.input_pay.text() == '' or int(self.input_pay.text()) < GlobalStore.public_final_price:
+            QMessageBox.warning(self, "경고", "결제 금액을 정확히 입력해주세요.")
+            return
+
+        insert_payment_ticket()  # 실제 결제 처리
         bookpage5.resetpaylabel()
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.accept()
@@ -1056,20 +1231,36 @@ class BookPage5(QDialog):
         super(BookPage5,self).__init__()
         loadUi('bookpage5.ui',self)
         self.btn_home.clicked.connect(self.go0page)
+    print(GlobalStore.public_ticket_code)
 
     def resetpaylabel(self):
-        # 예매번호 생성 함수: 전화번호 뒤 4자리 + 종료시간(HHMM) + 관 ID
+        # 예매번호 출력
+        self.lbl_rescode.setText(GlobalStore.public_ticket_code)
 
-        # self.lbl_rescode.setText(latest_code)
+        # 기본 정보 출력
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
         self.lbl_selecttime.setText(GlobalStore.public_selecttime)
         self.lbl_selecttheater.setText(GlobalStore.public_selecttheater)
         self.lbl_adtnum.setText(f'{GlobalStore.public_adtnumber}명')
         self.lbl_teennum.setText(f'{GlobalStore.public_teennumber}명')
         self.lbl_selected_seat.setText(', '.join(GlobalStore.public_seat))
+        # 총 결제 금액
+        total = GlobalStore.public_final_price
+        self.lbl_total.setText(f'총 금액 : {total}원')
 
-        
-        self.lbl_total.setText(f'총 금액 : {GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)+(GlobalStore.public_theaterprice-2000) * int(GlobalStore.public_teennumber)}원')
+        # 포스터 이미지 설정
+        real_url = extract_real_image_url(GlobalStore.public_poster_url)
+        try:
+            image_data = urllib.request.urlopen(real_url).read()
+            pixmap = QPixmap()
+            pixmap.loadFromData(image_data)
+            icon = QIcon(pixmap)
+            self.btn_poster.setIcon(icon)
+            self.btn_poster.setIconSize(QSize(120, 180))
+            self.btn_poster.setMinimumSize(QSize(120, 180))
+        except Exception as e:
+            print(f"포스터 이미지 로딩 실패: {GlobalStore.public_poster_url}")
+            print(e)
 
     def go0page(self):
         GlobalStore.public_selectname = ''
