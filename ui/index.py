@@ -986,6 +986,25 @@ class BookPage3(QDialog):
             seatbtn3 = getattr(self, f'seat_{i + 1}')
             seatbtn3.setDisabled(False)
         self.btn_next.setDisabled(True)
+        buttons = self.findChildren(QPushButton)
+        for i in range(len(buttons) - 2):
+            btn_seat = getattr(self,f'seat_{i + 1}')
+            btn_seat.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            """)
         # print(widget.currentIndex())
 
     def goNext(self):
@@ -1388,6 +1407,68 @@ class BookPage5(QDialog):
         bookpage2.lbl_teennum.setText('0')
         bookpage2.input_adt.setText('0')
         bookpage2.input_teen.setText('0')
+
+        for i in range(1, 9):
+            btn_adt = getattr(bookpage2, f"btn_adt{i}")
+            btn_teen = getattr(bookpage2, f"btn_teen{i}")
+            btn_adt.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+            btn_teen.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 2px;}
+            """)
+
+        GlobalStore.public_seat = []
+        GlobalStore.public_occupied = []
+        # print(GlobalStore.public_occupied)
+        buttons = bookpage3.findChildren(QPushButton)
+        for i in range(len(buttons) - 2):
+            seatbtn1 = getattr(bookpage3, f'seat_{i + 1}')
+            seatbtn1.setStyleSheet(
+            """QPushButton{""
+            }""")
+        bookpage3.lbl_seat.setText('')
+        buttons = bookpage3.findChildren(QPushButton)
+        for i in range(len(buttons) - 2):
+            seatbtn3 = getattr(bookpage3, f'seat_{i + 1}')
+            seatbtn3.setDisabled(False)
+        bookpage3.btn_next.setDisabled(True)
+        buttons = bookpage3.findChildren(QPushButton)
+        for i in range(len(buttons) - 2):
+            btn_seat = getattr(bookpage3,f'seat_{i + 1}')
+            btn_seat.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            """)
+        bookpage4_input = bookpage4.findChildren(QLineEdit)
+        bookpage4_input.clear()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
