@@ -32,25 +32,6 @@
     <string>홈으로</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_sales">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>30</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>NanumGothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>매출 조회하기</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="lbl_title">
    <property name="geometry">
     <rect>
