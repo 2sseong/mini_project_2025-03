@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:#24242C;</string>
+  </property>
   <widget class="QPushButton" name="seat_1">
    <property name="geometry">
     <rect>
@@ -39,6 +42,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>A01</string>
@@ -59,6 +71,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>A02</string>
    </property>
@@ -77,6 +98,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B01</string>
@@ -97,6 +127,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>B02</string>
    </property>
@@ -115,6 +154,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>D02</string>
@@ -135,6 +183,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C02</string>
    </property>
@@ -153,6 +210,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>C01</string>
@@ -173,6 +239,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>D01</string>
    </property>
@@ -191,6 +266,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>E02</string>
@@ -211,6 +295,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>E01</string>
    </property>
@@ -229,6 +322,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B03</string>
@@ -249,6 +351,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C03</string>
    </property>
@@ -267,6 +378,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>A03</string>
@@ -287,6 +407,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>E03</string>
    </property>
@@ -305,6 +434,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>D03</string>
@@ -325,6 +463,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C04</string>
    </property>
@@ -343,6 +490,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B04</string>
@@ -363,6 +519,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>D04</string>
    </property>
@@ -381,6 +546,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>E04</string>
@@ -401,6 +575,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>A04</string>
    </property>
@@ -419,6 +602,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>D05</string>
@@ -439,6 +631,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>E05</string>
    </property>
@@ -457,6 +658,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>A05</string>
@@ -477,6 +687,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C05</string>
    </property>
@@ -495,6 +714,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B05</string>
@@ -515,6 +743,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>D06</string>
    </property>
@@ -533,6 +770,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>C06</string>
@@ -553,6 +799,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>A06</string>
    </property>
@@ -571,6 +826,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>E06</string>
@@ -591,6 +855,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>B06</string>
    </property>
@@ -609,6 +882,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>C07</string>
@@ -629,6 +911,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>E07</string>
    </property>
@@ -647,6 +938,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B07</string>
@@ -667,6 +967,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>A07</string>
    </property>
@@ -685,6 +994,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>D07</string>
@@ -705,6 +1023,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>F06</string>
    </property>
@@ -723,6 +1050,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>F07</string>
@@ -743,6 +1079,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>F04</string>
    </property>
@@ -761,6 +1106,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>F03</string>
@@ -781,6 +1135,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>F05</string>
    </property>
@@ -799,6 +1162,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>F01</string>
@@ -819,6 +1191,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>F02</string>
    </property>
@@ -837,6 +1218,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>B09</string>
@@ -857,6 +1247,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C09</string>
    </property>
@@ -875,6 +1274,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>E08</string>
@@ -895,6 +1303,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>A09</string>
    </property>
@@ -913,6 +1330,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>E09</string>
@@ -933,6 +1359,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>D08</string>
    </property>
@@ -951,6 +1386,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>F09</string>
@@ -971,6 +1415,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>F08</string>
    </property>
@@ -989,6 +1442,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>A08</string>
@@ -1009,6 +1471,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>C08</string>
    </property>
@@ -1027,6 +1498,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
    </property>
    <property name="text">
     <string>D09</string>
@@ -1047,6 +1527,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 2px;</string>
+   </property>
    <property name="text">
     <string>B08</string>
    </property>
@@ -1065,6 +1554,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #ffffff,
+                    stop: 1 #dddddd
+                );
+color: black;
+border-radius:4;</string>
    </property>
    <property name="text">
     <string>이전페이지</string>
@@ -1085,6 +1583,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string>다음페이지</string>
    </property>
@@ -1103,6 +1610,11 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:#151820;
+color:white;
+</string>
    </property>
    <property name="text">
     <string>Screen</string>
@@ -1126,6 +1638,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -1144,6 +1659,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -1164,6 +1682,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>선택한 영화</string>
    </property>
@@ -1182,6 +1703,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -1202,6 +1726,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>청소년 인원</string>
    </property>
@@ -1220,6 +1747,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>성인 인원</string>
@@ -1240,6 +1770,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -1258,6 +1791,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -1278,6 +1814,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>선택한 관</string>
    </property>
@@ -1296,6 +1835,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>선택한 시간</string>
@@ -1316,6 +1858,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>좌석</string>
    </property>
@@ -1334,6 +1879,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string/>

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:#24242C;</string>
+  </property>
   <widget class="QPushButton" name="btn_next">
    <property name="geometry">
     <rect>
@@ -28,6 +31,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string>다음페이지</string>
    </property>
@@ -40,6 +52,9 @@
      <width>140</width>
      <height>180</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent;</string>
    </property>
    <property name="text">
     <string/>
@@ -60,6 +75,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #ffffff,
+                    stop: 1 #dddddd
+                );
+color: black;
+border-radius:4;</string>
+   </property>
    <property name="text">
     <string>홈으로</string>
    </property>
@@ -73,6 +97,9 @@
      <height>180</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -85,6 +112,9 @@
      <width>140</width>
      <height>180</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent;</string>
    </property>
    <property name="text">
     <string/>
@@ -105,6 +135,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -123,6 +162,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
    </property>
    <property name="text">
     <string/>
@@ -143,6 +191,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -161,6 +218,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
    </property>
    <property name="text">
     <string/>
@@ -181,6 +247,9 @@
      <pointsize>16</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>3관</string>
    </property>
@@ -199,6 +268,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
    </property>
    <property name="text">
     <string/>
@@ -219,6 +297,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -237,6 +324,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
    </property>
    <property name="text">
     <string/>
@@ -257,6 +353,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -275,6 +380,15 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
    </property>
    <property name="text">
     <string/>
@@ -295,6 +409,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -313,6 +436,9 @@
      <family>NanumGothic</family>
      <pointsize>16</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>1관</string>
@@ -333,6 +459,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -351,6 +486,9 @@
      <family>NanumGothic</family>
      <pointsize>16</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>2관</string>
@@ -371,6 +509,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 4px;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -389,6 +536,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string/>
@@ -412,6 +562,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -433,6 +586,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string/>
@@ -456,6 +612,10 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+border:none;</string>
+   </property>
    <property name="readOnly">
     <bool>true</bool>
    </property>
@@ -474,6 +634,10 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+border:none;</string>
    </property>
    <property name="readOnly">
     <bool>true</bool>
@@ -494,6 +658,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>선택한 영화</string>
    </property>
@@ -512,6 +679,9 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
    </property>
    <property name="text">
     <string>선택한 시간</string>
@@ -532,6 +702,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;</string>
+   </property>
    <property name="text">
     <string>선택한 관</string>
    </property>
@@ -550,6 +723,10 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+border:none;</string>
    </property>
    <property name="readOnly">
     <bool>true</bool>
