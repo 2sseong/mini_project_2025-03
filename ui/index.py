@@ -29,6 +29,16 @@ class EscBlocker(QObject):
         if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Escape:
             return True  # ESC 무시
         return super().eventFilter(obj, event)
+#일림창 스타일
+class CustomMessageBox(QMessageBox):
+    def __init__(self, icon, title, text):
+        super().__init__(None)  # 상위 클래스 없음
+        self.setWindowIcon(QIcon('icon.png'))
+        self.setIcon(icon)
+        self.setWindowTitle(title)
+        self.setText(text)
+        self.setStyleSheet("""QMessageBox { background-color: white; }""")  # 스타일도 커스텀 가능
+        self.exec_()
 
 class GlobalStore:
     public_selectname = ''
@@ -195,13 +205,13 @@ def insert_payment_ticket():
 
         # 커밋 및 알림
         conn.commit()
-        QMessageBox.information(None, "성공", f"예매 완료\n예매번호: {ticket_code}\n영수증 코드: {payment_code}")
+        CustomMessageBox(QMessageBox.Information,"성공", f"예매 완료\n예매번호: {ticket_code}\n영수증 코드: {payment_code}")
 
     except Exception as e:
         import traceback
         tb = traceback.format_exc()
         conn.rollback()
-        QMessageBox.critical(None, "DB 오류", f"{str(e)}\n\n{tb}")
+        CustomMessageBox(QMessageBox.Critical,"DB 오류", f"{str(e)}\n\n{tb}")
 
     finally:
         cursor.close()
@@ -220,6 +230,8 @@ class MainWindow(QDialog):
 
     def show_admin_login(self):
         dlg = LoginDialog()
+        dlg.setWindowIcon(QIcon('icon.png'))
+        dlg.setWindowTitle('관리자 로그인')
         if dlg.exec_() == QDialog.Accepted:
 
             # 로그인 성공
@@ -314,14 +326,14 @@ class LoginDialog(QDialog):
 
         #관리자 계정 로그인
         if user_id == "admin" and user_pw == "1234":
-            QMessageBox.information(self, "로그인 성공", "로그인에 성공했습니다!")
+            CustomMessageBox(QMessageBox.Information, "로그인 성공", "로그인에 성공했습니다!")
             loadData()
             loadCount()
             graphSales()
             self.accept()
             
         else:
-            QMessageBox.warning(self, "로그인 실패", "아이디 또는 비밀번호가 틀렸습니다.")
+            CustomMessageBox(QMessageBox.Warning, "로그인 실패", "아이디 또는 비밀번호가 틀렸습니다.")
 
 class AdminPage(QDialog):
     def __init__(self):
@@ -353,9 +365,9 @@ class SearchPage(QDialog):
     def startsearch(self):
         std_ticket_code = self.input_key.text()
         if std_ticket_code == '':
-            QMessageBox.warning(self, '오류', '예매번호를 입력해주세요')
+            CustomMessageBox(QMessageBox.Warning, '오류', '예매번호를 입력해주세요')
         elif not std_ticket_code.isdigit():   #예매번호 숫자 외에 입력시
-            QMessageBox.warning(self, '오류', '예매번호는 숫자만 입력해주세요')
+            CustomMessageBox(QMessageBox.Warning, '오류', '예매번호는 숫자만 입력해주세요')
         else:
             self.loadData(std_ticket_code) 
 
@@ -398,7 +410,7 @@ class SearchPage(QDialog):
 
     def makeTable(self,lst_ticket):
         if not lst_ticket:  #예매번호 없을때 
-            QMessageBox.warning(self, '오류', '예매번호가 없어요')
+            CustomMessageBox(QMessageBox.Warning, '오류', '예매번호가 없어요')
             self.tbl_search.setModel(None)
             return
         model = QStandardItemModel()
@@ -683,6 +695,12 @@ class BookPage2(QDialog):
         self.lbl_adtnum.setText(str(GlobalStore.public_adtnumber))
         self.lbl_teennum.setText(str(GlobalStore.public_teennumber))
 
+        for i in range(1, 9):
+            btn_adt = getattr(self, f"btn_adt{i}")
+            btn_teen = getattr(self, f"btn_teen{i}")
+            btn_adt.setChecked(False)
+            btn_teen.setChecked(False)
+
     def goBack(self):
         for i in range(1,9):
             btn_adt = getattr(self, f"btn_adt{i}")
@@ -712,8 +730,8 @@ class BookPage2(QDialog):
             color: white;
             border-radius: 2px;}
             """)
-            btn_adt.setChecked(True)
-            btn_teen.setChecked(True)
+            btn_adt.setChecked(False)
+            btn_teen.setChecked(False)
         widget.setCurrentIndex(widget.currentIndex()-1)
         # print(GlobalStore.public_selecttheater,GlobalStore.public_selectname,GlobalStore.public_selecttime)
         # print(widget.currentIndex())
@@ -865,8 +883,8 @@ class BookPage2(QDialog):
             conn.close()
 
         except Exception as e:
-            QMessageBox.critical(self, "DB 오류", str(e))
-        
+            CustomMessageBox(QMessageBox.Critical, "DB 오류", str(e))
+
 class BookPage3(QDialog):
     def __init__(self):
         super(BookPage3,self).__init__()
@@ -936,14 +954,27 @@ class BookPage3(QDialog):
             for i in temp:
                 GlobalStore.public_seat.append(i)
             if set(GlobalStore.public_seat) & set(GlobalStore.public_occupied):
-                QMessageBox.warning(self,'경고','이미 예약된 자리가 있어서 선택불가합니다.')
+                CustomMessageBox(QMessageBox.Warning, '경고', '이미 예약된 자리가 있어서 선택불가합니다.')
             else:
                 buttons = self.findChildren(QPushButton)
                 for i in range(len(buttons) - 2):
                     seatbtn1 = getattr(self, f'seat_{i + 1}')
-                    seatbtn1.setStyleSheet(
-                        """QPushButton{""
-                        }""")
+                    seatbtn1.setStyleSheet("""
+            QPushButton{
+            background: qlineargradient(
+                        x1: 0, y1: 0, x2: 0, y2: 1,
+                        stop: 0 #31343E,
+                        stop: 1 #2C2F3F
+                    );
+            color: white;
+            border-radius: 4;}
+            QPushButton:disabled {
+            border: 1px solid #151820;
+            color: #151820;
+            background:transparent;
+            border-radius: 4;
+            }
+            """)
                     
                 for j in GlobalStore.public_seat:
                     # print(j)
@@ -967,7 +998,7 @@ class BookPage3(QDialog):
                 else:
                     self.btn_next.setDisabled(False)
         else:
-            QMessageBox.warning(self,'경고','인원에 맞지 않는 좌석입니다.')
+            CustomMessageBox(QMessageBox.Warning, '경고', '인원에 맞지 않는 좌석입니다.')
         
     def goBack(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
@@ -1035,7 +1066,6 @@ class BookPage3(QDialog):
         cursor.close()
         conn.close()
         # print(result)
-    
  
 class BookPage4(QDialog):
     resetLabelSignal = pyqtSignal()
@@ -1049,11 +1079,13 @@ class BookPage4(QDialog):
 
     def userInformation(self):
         dlg = userPayment() #payment클래스 쓰기위한 변수
+        dlg.setWindowIcon(QIcon('icon.png'))
+        dlg.setWindowTitle('회원 결제창')
         user_id = self.input_userid.text()
         GlobalStore.public_personinfo.append(user_id)
         GlobalStore.public_user_id = user_id # 추가한 코드
         if user_id == '':
-            QMessageBox.warning(self, "입력 누락", "모든 정보를 입력해주세요")
+            CustomMessageBox(QMessageBox.Warning, "입력 누락", "모든 정보를 입력해주세요")
             return
 
         try:
@@ -1075,32 +1107,31 @@ class BookPage4(QDialog):
             if result:
                 name, phone, birth, gender = result
                 GlobalStore.public_personinfo.clear() # 클리어 작업 넣기personinfo
-                QMessageBox.information(
-                    self, "회원 확인",
-                    f"회원정보 확인 완료:\n이름: {name}\n전화: {phone}\n생일: {birth}\n성별: {gender}"
-                )
+                CustomMessageBox(QMessageBox.Information, "회원 확인", f"회원정보 확인 완료:\n이름: {name}\n전화: {phone}\n생일: {birth}\n성별: {gender}")
                 for i in result:
                     GlobalStore.public_personinfo.append(i)
                 # print(GlobalStore.public_personinfo[0])
                 dlg.exec() == QDialog.Accepted
                 widget.setCurrentIndex(widget.currentIndex()+5) 
             else:
-                QMessageBox.warning(self, "오류", "해당 회원이 존재하지 않습니다.")
+                CustomMessageBox(QMessageBox.Warning, "오류", "해당 회원이 존재하지 않습니다.")
 
         except Exception as e:
-            QMessageBox.critical(self, "DB 오류", str(e))
+            CustomMessageBox(QMessageBox.Critical, "DB 오류", str(e))
 
     def guestInformation(self): 
         dlg = guestPayment()
+        dlg.setWindowIcon(QIcon('icon.png'))
+        dlg.setWindowTitle('비회원 결제창')
         guest_name = self.input_name.text() or None
         guest_phone = self.input_phone.text()
         guest_birth = self.input_birth.text() or None
         guest_gender = self.input_gender.text() or None
         if guest_phone == '':
-            QMessageBox.warning(self, "경고", "전화번호 기입은 필수입니다.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "전화번호 기입은 필수입니다.")
             return
         if not guest_phone.isdigit() or len(guest_phone) != 11:
-            QMessageBox.warning(self, "경고", "전화번호는 11자리 숫자여야 합니다.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "전화번호는 11자리 숫자여야 합니다.")
             return
         
         GlobalStore.public_personinfo.clear() # 클리어 작업 넣기personinfo
@@ -1108,7 +1139,7 @@ class BookPage4(QDialog):
         GlobalStore.public_personinfo.append(guest_phone)
         GlobalStore.public_personinfo.append(guest_birth)
         GlobalStore.public_personinfo.append(guest_gender)
-        QMessageBox.information(self, "비회원 결제", "비회원정보 입력이 완료되어 결제창으로 이동합니다.")
+        CustomMessageBox(QMessageBox.Information, "비회원 결제", "비회원정보 입력이 완료되어 결제창으로 이동합니다.")
         dlg.exec() == QDialog.Accepted
         widget.setCurrentIndex(widget.currentIndex()+5) 
             
@@ -1193,13 +1224,15 @@ class userPayment(QDialog):
 
     def getPayEnter(self):
         if self.input_pay.text() == '':
-            QMessageBox.warning(self, "경고", "가격을 입력해주세요")
+            CustomMessageBox(QMessageBox.Warning, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.lbl_change.setText('0')
             self.btn_pay.setDisabled(True)  # ❗ 실패 시 다시 비활성화
             return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
-            QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.lbl_change.setText('0')
             self.btn_pay.setDisabled(True)
             return
         else:
@@ -1209,7 +1242,7 @@ class userPayment(QDialog):
     def goReceipt2(self):
         # 돈을 안 넣었을 경우
         if self.input_pay.text() == '' or int(self.input_pay.text()) < GlobalStore.public_final_price:
-            QMessageBox.warning(self, "경고", "결제 금액을 정확히 입력해주세요.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "결제 금액을 정확히 입력해주세요.")
             return
         
         insert_payment_ticket()  # 실제 결제 처리
@@ -1228,7 +1261,7 @@ class guestPayment(QDialog):
         # 총 금액 계산
         adt_price = GlobalStore.public_theaterprice * int(GlobalStore.public_adtnumber)
         teen_price = (GlobalStore.public_theaterprice - 2000) * int(GlobalStore.public_teennumber)
-        total = adt_price + teen_price - 1000  # -1000은 할인 금액
+        total = adt_price + teen_price  
         GlobalStore.public_final_price = total  # ✅ 전역변수에 저장
 
         self.lbl_selectmovie.setText(GlobalStore.public_selectname)
@@ -1256,8 +1289,6 @@ class guestPayment(QDialog):
                                 border: none;  /* 테두리 없애기 */
                         }
         """)
-
-        self.btn_payenter.clicked.connect(self.getPayEnter)
 
         real_url = extract_real_image_url(GlobalStore.public_poster_url)
         try:
@@ -1305,13 +1336,15 @@ class guestPayment(QDialog):
 
     def getPayEnter(self):
         if self.input_pay.text() == '':
-            QMessageBox.warning(self, "경고", "가격을 입력해주세요")
+            CustomMessageBox(QMessageBox.Warning, "경고", "가격을 입력해주세요")
             self.input_pay.clear()
+            self.lbl_change.setText('0')
             self.btn_pay.setEnabled(False)  # ❗ 실패 시 다시 비활성화
             return
         elif int(self.input_pay.text()) < int(self.lbl_total.text()[:-1]):
-            QMessageBox.warning(self, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "입력하신 가격이 최종 가격보다 작습니다.")
             self.input_pay.clear()
+            self.lbl_change.setText('0')
             self.btn_pay.setEnabled(False)
             return
         else:
@@ -1321,7 +1354,7 @@ class guestPayment(QDialog):
     def goReceipt2(self):
             # 돈을 안 넣었을 경우
         if self.input_pay.text() == '' or int(self.input_pay.text()) < GlobalStore.public_final_price:
-            QMessageBox.warning(self, "경고", "결제 금액을 정확히 입력해주세요.")
+            CustomMessageBox(QMessageBox.Warning, "경고", "결제 금액을 정확히 입력해주세요.")
             return
 
         insert_payment_ticket()  # 실제 결제 처리
@@ -1466,8 +1499,11 @@ class BookPage5(QDialog):
             border-radius: 4;
             }
             """)
-        bookpage4_input = bookpage4.findChildren(QLineEdit)
-        bookpage4_input.clear()
+        bookpage4.input_userid.setText('')
+        bookpage4.input_phone.setText('')
+        bookpage4.input_name.setText('')
+        bookpage4.input_birth.setText('')
+        bookpage4.input_gender.setText('')
 
 
 if __name__ == '__main__':
@@ -1497,6 +1533,9 @@ if __name__ == '__main__':
     widget.addWidget(bookpage5)
     widget.addWidget(userpayment)
     widget.addWidget(guestpayment)
+    widget.setWindowIcon(QIcon('icon.png'))
+    widget.setWindowTitle('영화 예매 키오스크')
+    widget.setFixedSize(1000, 700)
     widget.show()
     app.exec_()
     

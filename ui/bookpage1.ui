@@ -526,7 +526,7 @@ border-radius: 4px;</string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>320</y>
+     <y>300</y>
      <width>140</width>
      <height>25</height>
     </rect>
@@ -551,7 +551,7 @@ border-radius: 4px;</string>
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>320</y>
+     <y>300</y>
      <width>140</width>
      <height>25</height>
     </rect>
@@ -576,7 +576,7 @@ border-radius: 4px;</string>
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>320</y>
+     <y>300</y>
      <width>140</width>
      <height>25</height>
     </rect>

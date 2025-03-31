@@ -31,6 +31,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
    <string notr="true">background:#24242C;</string>
   </property>
@@ -77,6 +80,9 @@
      <pointsize>20</pointsize>
     </font>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <property name="styleSheet">
     <string notr="true">background: qlineargradient(
                     x1: 0, y1: 0, x2: 0, y2: 1,
@@ -84,7 +90,11 @@
                     stop: 1 #2C2F3F
                 );
 color: white;
-border-radius: 6px;</string>
+border-radius: 6px;
+text-align: center;
+QPushButton::icon {
+            padding-bottom: 5px; /* 텍스트와 아이콘 간격 조정 */
+        }</string>
    </property>
    <property name="text">
     <string>예매 조회</string>

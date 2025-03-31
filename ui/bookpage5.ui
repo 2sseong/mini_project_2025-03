@@ -414,7 +414,7 @@ background:#151820;</string>
     <string notr="true">color:rgb(216, 17, 17);background:#151820;</string>
    </property>
    <property name="text">
-    <string>위의 예매번호로 무인발권기에서 티켓 출력 후 입장하세요.</string>
+    <string>꼭 하단에 티켓을 챙기세요!</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_selected_seat">
