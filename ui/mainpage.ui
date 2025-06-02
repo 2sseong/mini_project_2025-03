@@ -31,6 +31,12 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background:#24242C;</string>
+  </property>
   <widget class="QLabel" name="lbl_title">
    <property name="geometry">
     <rect>
@@ -46,8 +52,14 @@
      <pointsize>26</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+
+
+</string>
+   </property>
    <property name="text">
-    <string>영화 예매 프로그램</string>
+    <string>원하는 서비스를 선택해주세요.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -68,6 +80,22 @@
      <pointsize>20</pointsize>
     </font>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #31343E,
+                    stop: 1 #2C2F3F
+                );
+color: white;
+border-radius: 6px;
+text-align: center;
+QPushButton::icon {
+            padding-bottom: 5px; /* 텍스트와 아이콘 간격 조정 */
+        }</string>
+   </property>
    <property name="text">
     <string>예매 조회</string>
    </property>
@@ -75,7 +103,7 @@
   <widget class="QPushButton" name="btn_book">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>545</x>
      <y>250</y>
      <width>350</width>
      <height>350</height>
@@ -86,6 +114,15 @@
      <family>NanumGothic</family>
      <pointsize>20</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(
+                    x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 #AF2E29,
+                    stop: 1 #8E2824
+                );
+color: white;
+border-radius: 6px;</string>
    </property>
    <property name="text">
     <string>영화 예매</string>
@@ -105,6 +142,11 @@
      <family>NanumGothic</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:#151820;
+color:white;
+</string>
    </property>
    <property name="text">
     <string>관리자</string>

@@ -27,27 +27,30 @@
    </property>
    <property name="font">
     <font>
-     <family>굴림체</family>
+     <family>NanumGothic</family>
      <pointsize>20</pointsize>
     </font>
    </property>
    <property name="text">
     <string>관리자 로그인</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="ID">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>130</y>
+     <y>125</y>
      <width>21</width>
      <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>굴림</family>
-     <pointsize>16</pointsize>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -65,8 +68,8 @@
    </property>
    <property name="font">
     <font>
-     <family>굴림</family>
-     <pointsize>16</pointsize>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -82,8 +85,14 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background:rgb(149, 149, 149)</string>
+    <string notr="true"/>
    </property>
   </widget>
   <widget class="QLineEdit" name="user_pw">
@@ -95,8 +104,14 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background:rgb(149, 149, 149)</string>
+    <string notr="true"/>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
@@ -105,11 +120,17 @@
   <widget class="QPushButton" name="btn_ok">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>250</y>
-     <width>75</width>
-     <height>23</height>
+     <x>290</x>
+     <y>260</y>
+     <width>100</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumGothic</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>로그인</string>
